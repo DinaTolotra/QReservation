@@ -9,20 +9,15 @@
 class Entity
 {
 public:
-    virtual bool addToDB() = 0;
+    virtual bool addToDB() = 0;/*
     virtual bool updateIntoDB() = 0;
-    virtual bool removeIntoDB() = 0;
+    virtual bool removeIntoDB() = 0;*/
 
 protected:
     Entity();
-    ~Entity();
-
-private:
-    Entity(const Entity &entity) = delete;
-    Entity operator=(const Entity &entity) = delete;
 
 protected:
-    Database *_db;
+    Database _db;
     QString _selectSttm;
     QString _insertSttm;
     QString _updateSttm;

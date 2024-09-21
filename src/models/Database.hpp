@@ -15,36 +15,20 @@
 class Database
 {
 public:
-    /**
-     * @brief Constructeur par defaut
-     */
     Database();
 
-    /**
-     * @brief Obtenir le querry du DB
-     * @return Un pointeur vers le querry du DB
-     */
     QSqlQuery* getQuerry();
+    static void setupDatabase();
+    static void closeDatabase();
 
-    /**
-     * @brief Initialise le connection avec le DB
-     * @return True si le connection est etablie, False sinon
-     */
-    bool setupConnection();
-    /**
-     * @brief Initialise l'objet query
-     */
-    void setupQuery();
-
-    /**
-     * @brief Termine la connection
-     */
-    void disconnect();
+private:
+    static bool setupConnection();
+    static void setupQuery();
 
 private:
     // follow the singleton pattern
-    static QSqlDatabase *_db;
-    static QSqlQuery *_query;
+    static QSqlDatabase *db;
+    static QSqlQuery *query;
 };
 
 

@@ -1,8 +1,8 @@
 #include "Database.hpp"
 
 // setting static propriety default value
-QSqlDatabase *Database::_db = nullptr;
-QSqlQuery *Database::_query = nullptr;
+QSqlDatabase *Database::db = nullptr;
+QSqlQuery *Database::query = nullptr;
 
 
 Database::Database()
@@ -11,37 +11,46 @@ Database::Database()
 
 QSqlQuery *Database::getQuerry()
 {
-    return Database::_query;
+    return query;
+}
+
+
+void Database::setupDatabase()
+{
+    if (db == nullptr)
+        setupConnection();
+    if (query == nullptr)
+        setupQuery();
+}
+
+
+void Database::closeDatabase()
+{
+    if (query != nullptr) {
+        query->clear();
+        delete query;
+    }
+    if (db != nullptr) {
+        db->close();
+        db->removeDatabase("conn");
+        delete db;
+    }
 }
 
 
 bool Database::setupConnection()
 {
-    if (Database::_db != nullptr) return true;
+    if (db != nullptr) return true;
 
-    Database::_db = new QSqlDatabase();
-    *Database::_db = QSqlDatabase::addDatabase("QMYSQL");
-    Database::_db->setDatabaseName("projet_fin_annee");
-    Database::_db->setHostName("localhost");
-    return Database::_db->open("root", "root");
+    db = new QSqlDatabase();
+    *db = QSqlDatabase::addDatabase("QMYSQL", "conn");
+    db->setDatabaseName("projet_fin_annee");
+    db->setHostName("localhost");
+    return db->open("root", "root");
 }
 
 
 void Database::setupQuery()
 {
-    if (Database::_query != nullptr) return;
-    Database::_query = new QSqlQuery(*Database::_db);
-}
-
-
-void Database::disconnect()
-{
-    if (Database::_query != nullptr) {
-        Database::_query->clear();
-        delete Database::_query;
-    }
-    if (Database::_db != nullptr) {
-        Database::_db->close();
-        delete Database::_db;
-    }
+    query = new QSqlQuery(*db);
 }

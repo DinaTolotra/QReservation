@@ -12,3 +12,9 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_save_clicked()
+{
+    Client client = ui->view->getClient();
+    client.addToDB();
+}
