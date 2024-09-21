@@ -10,10 +10,12 @@ CONFIG += c++17
 
 SOURCES += \
     src/main.cpp \
+    src/models/Client/Client.cpp \
     src/models/Database.cpp \
     src/views/MainWindow.cpp
 
 HEADERS += \
+    src/models/Client/Client.hpp \
     src/models/Database.hpp \
     src/views/MainWindow.hpp
 
