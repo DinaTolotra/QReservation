@@ -10,16 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     src/main.cpp \
-    src/views/Booking/BookingWgt.cpp \
-    src/views/Window.cpp
+    src/views/MainWindow.cpp
 
 HEADERS += \
-    src/views/Booking/BookingWgt.hpp \
-    src/views/Window.hpp
+    src/views/MainWindow.hpp
 
 FORMS += \
-    src/views/Booking/BookingWgt.ui \
-    src/views/Window.ui
+    src/views/MainWindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
