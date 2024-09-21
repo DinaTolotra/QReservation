@@ -4,10 +4,6 @@
 #include <QMainWindow>
 #include <QtCore/QDebug>
 
-#include "Table/Database.hpp"
-#include "Table/CalTable/Calendrier.hpp"
-
-
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -24,7 +20,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    Database *_db;
 
 };
 #endif // MAINWINDOW_HPP
