@@ -42,7 +42,7 @@ public:
     void disconnect();
 
 private:
-    // the _db instance follow the singleton pattern
+    // follow the singleton pattern
     static QSqlDatabase *_db;
     static QSqlQuery *_query;
 };
