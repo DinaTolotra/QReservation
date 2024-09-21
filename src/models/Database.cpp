@@ -9,6 +9,12 @@ Database::Database()
 {}
 
 
+QSqlQuery *Database::getQuerry()
+{
+    return Database::_query;
+}
+
+
 bool Database::setupConnection()
 {
     if (Database::_db != nullptr) return true;
@@ -23,7 +29,7 @@ bool Database::setupConnection()
 
 void Database::setupQuery()
 {
-    if (Database::_query) return;
+    if (Database::_query != nullptr) return;
     Database::_query = new QSqlQuery(*Database::_db);
 }
 
