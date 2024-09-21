@@ -23,16 +23,16 @@ bool Database::setupConnection()
 
 void Database::setupQuery()
 {
-    if (QSqlQuery::_query) return;
-    QSqlQuery::_query = new QSqlQuery(*Database::_db);
+    if (Database::_query) return;
+    Database::_query = new QSqlQuery(*Database::_db);
 }
 
 
 void Database::disconnect()
 {
-    if (QSqlQuery::_query != nullptr) {
-        QSqlQuery::_query->clear();
-        delete QSqlQuery::_query;
+    if (Database::_query != nullptr) {
+        Database::_query->clear();
+        delete Database::_query;
     }
     if (Database::_db != nullptr) {
         Database::_db->close();
