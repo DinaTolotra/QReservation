@@ -21,26 +21,14 @@ public:
     Database();
 
     /**
-     * @brief Execute un commande sql
-     * @param sttm Le commande à exectuer
-     * @return True si l'execution s'est bien passée, False sinon
+     * @brief Obtenir le querry du DB
+     * @return Un pointeur vers le querry du DB
      */
-    bool exec(QString sttm);
-    /**
-     * @brief Obtenir la valeur d'un colonne donnée
-     * @param colName
-     * @return
-     */
-    QVariant value(QString colName);
-    /**
-     * @brief Passe à l'enregitrement suivant
-     * @return True si il y a encore un ou plusieur enregistrements
-     */
-    bool next();
+    QSqlQuery* getQuerry();
 
     /**
      * @brief Initialise le connection avec le DB
-     * @return
+     * @return True si le connection est etablie, False sinon
      */
     bool setupConnection();
     /**
@@ -56,7 +44,7 @@ public:
 private:
     // the _db instance follow the singleton pattern
     static QSqlDatabase *_db;
-    QSqlQuery *_query;
+    static QSqlQuery *_query;
 };
 
 

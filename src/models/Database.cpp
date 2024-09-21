@@ -2,10 +2,10 @@
 
 // setting static propriety default value
 QSqlDatabase *Database::_db = nullptr;
+QSqlQuery *Database::_query = nullptr;
 
 
 Database::Database()
-    : _query(nullptr)
 {}
 
 
@@ -23,41 +23,19 @@ bool Database::setupConnection()
 
 void Database::setupQuery()
 {
-    if (_query) return;
-    _query = new QSqlQuery(*Database::_db);
+    if (QSqlQuery::_query) return;
+    QSqlQuery::_query = new QSqlQuery(*Database::_db);
 }
 
 
 void Database::disconnect()
 {
-    if (_query != nullptr) {
-        _query->clear();
-        delete _query;
+    if (QSqlQuery::_query != nullptr) {
+        QSqlQuery::_query->clear();
+        delete QSqlQuery::_query;
     }
     if (Database::_db != nullptr) {
         Database::_db->close();
         delete Database::_db;
     }
-}
-
-
-bool Database::exec(QString sttm)
-{
-    _query->clear();
-    return _query->exec(sttm);
-}
-
-
-QVariant Database::value(QString colName)
-{
-    if (!_query) return QVariant();
-    if (!_query->isActive()) return QVariant();
-    return _query->value(colName);
-}
-
-
-bool Database::next()
-{
-    if (!_query) return false;
-    return _query->next();
 }
