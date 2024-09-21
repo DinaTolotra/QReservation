@@ -2,6 +2,7 @@
 #define CLIENT_HPP
 
 #include <QtCore/QString>
+#include <QtCore/QDebug>
 
 #include "../Entity.hpp"
 
@@ -10,11 +11,19 @@ enum Sexe {
     HOMME, FEMME
 };
 
+QChar sexeToChar(Sexe sexe);
+Sexe charToSexe(QChar c_sexe);
+
+
 
 class Client : public Entity
 {
 public:
     Client();
+
+    qint32 getLastNum();
+
+    bool addToDB();
 
     // Getter
     qint32 getNum() const;
@@ -32,7 +41,7 @@ public:
     void setTelephone(const QString &telephone);
 
 private:
-    QString _getIdSttm;
+    QString _getLastNumSttm;
 
     qint32 _num;
     QString _nom;

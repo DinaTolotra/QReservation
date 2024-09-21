@@ -8,11 +8,10 @@
 
 class Entity
 {
-public:/*
-    virtual Entity createFromQuery() = 0;
-    virtual qint32 add(Entity entity) = 0;
-    virtual bool update(Entity entity) = 0;
-    virtual bool remove(Entity entity) = 0;*/
+public:
+    virtual bool addToDB() = 0;
+    virtual bool updateIntoDB() = 0;
+    virtual bool removeIntoDB() = 0;
 
 protected:
     Entity();
