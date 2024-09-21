@@ -6,9 +6,9 @@ Client::Client()
 {
     _deleteSttm = "DELETE FROM CLIENT WHERE NUMCLI=:num";
     _insertSttm = "INSERT INTO CLIENT VALUE (:num, :nom, :sexe, :adr, :tel)";
-    _selectSttm = "SELECT FROM CLIENT WHERE NUM=:num";
+    _selectSttm = "SELECT FROM CLIENT WHERE NUMCLI=:num";
     _updateSttm = "UPDATE CLIENT SET NOM=:nom, ADRESSE=:adr,"
-                  "SEXE=:sexe, TEL=:tel WHERE NUM=:num";
+                  "SEXE=:sexe, TEL=:tel WHERE NUMCLI=:num";
     _getLastNumSttm = "SELECT MAX(NUMCLI) FROM CLIENT";
 }
 

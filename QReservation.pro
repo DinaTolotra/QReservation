@@ -16,12 +16,14 @@ SOURCES += \
     src/main.cpp \
     src/models/Client/Client.cpp \
     src/models/Entity.cpp \
+    src/models/Vehicle/Vehicle.cpp \
     src/views/Client/ClientView.cpp \
     src/views/MainWindow.cpp \
     src/models/Database.cpp
 
 HEADERS += \
     src/models/Client/Client.hpp \
+    src/models/Vehicle/Vehicle.hpp \
     src/views/Client/ClientView.hpp \
     src/views/MainWindow.hpp \
     src/models/Database.hpp \
