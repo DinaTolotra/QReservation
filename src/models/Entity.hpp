@@ -2,8 +2,6 @@
 #define ENTITY_HPP
 
 #include <QtCore/QString>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
 
 #include "Database.hpp"
 
@@ -23,7 +21,7 @@ private:
     Entity(const Entity &entity) = delete;
     Entity operator=(const Entity &entity) = delete; 
 
-private:
+protected:
     Database *_db;
     QString _selectSttm;
     QString _insertSttm;
