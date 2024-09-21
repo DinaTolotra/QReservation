@@ -1,9 +1,9 @@
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
 
-#include <qt6/QtCore/QString>
-#include <qt6/QtSql/QSqlDatabase>
-#include <qt6/QtSql/QSqlQuery>
+#include <QtCore/QString>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
 
 #include "Database.hpp"
 
@@ -16,8 +16,10 @@ public:
     virtual bool update(Entity entity) = 0;
     virtual bool remove(Entity entity) = 0;
 
+protected:
+    Entity();
+
 private:
-    Entity() = delete;
     Entity(const Entity &entity) = delete;
     Entity operator=(const Entity &entity) = delete; 
 
