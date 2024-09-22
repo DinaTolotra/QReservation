@@ -199,7 +199,23 @@
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="avanceIn"/>
+           <widget class="QSpinBox" name="avanceIn">
+            <property name="suffix">
+             <string> AR</string>
+            </property>
+            <property name="prefix">
+             <string/>
+            </property>
+            <property name="maximum">
+             <number>50000</number>
+            </property>
+            <property name="singleStep">
+             <number>1000</number>
+            </property>
+            <property name="stepType">
+             <enum>QAbstractSpinBox::StepType::DefaultStepType</enum>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -219,6 +235,9 @@
               <width>0</width>
               <height>24</height>
              </size>
+            </property>
+            <property name="intValue" stdset="0">
+             <number>50000</number>
             </property>
            </widget>
           </item>

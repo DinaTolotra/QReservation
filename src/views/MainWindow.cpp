@@ -15,7 +15,4 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_load_clicked()
 {
-    auto list = Vehicle::getList();
-    ui->view->setVehicleList(list);
-    ui->view->displayList();
 }

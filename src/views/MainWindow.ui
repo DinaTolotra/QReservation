@@ -16,9 +16,9 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="VehicleListView" name="view">
+     <widget class="BookingView" name="view">
       <property name="title">
-       <string>GroupBox</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -34,9 +34,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>VehicleListView</class>
+   <class>BookingView</class>
    <extends>QGroupBox</extends>
-   <header>src/views/VehicleList/VehicleListView.hpp</header>
+   <header>src/views/Booking/BookingView.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

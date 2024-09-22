@@ -14,6 +14,7 @@ INCLUDEPATH += \
 
 SOURCES += \
     src/main.cpp \
+    src/models/Booking/Booking.cpp \
     src/models/Client/Client.cpp \
     src/models/Entity.cpp \
     src/models/Vehicle/Vehicle.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
     src/views/VehicleList/VehicleListView.cpp
 
 HEADERS += \
+    src/models/Booking/Booking.hpp \
     src/models/Client/Client.hpp \
     src/models/Vehicle/Vehicle.hpp \
     src/views/Booking/BookingView.hpp \
