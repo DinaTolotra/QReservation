@@ -16,16 +16,16 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="ClientView" name="view">
+     <widget class="VehicleListView" name="view">
       <property name="title">
        <string>GroupBox</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="save">
+     <widget class="QPushButton" name="load">
       <property name="text">
-       <string>save</string>
+       <string>Load</string>
       </property>
      </widget>
     </item>
@@ -34,9 +34,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ClientView</class>
+   <class>VehicleListView</class>
    <extends>QGroupBox</extends>
-   <header>../../src/view/Client/ClientView.hpp</header>
+   <header>src/views/VehicleList/VehicleListView.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

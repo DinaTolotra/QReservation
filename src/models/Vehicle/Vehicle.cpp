@@ -1,6 +1,6 @@
 #include "Vehicle.hpp"
 
-QString Vehicle::_getListSttm = "SELECT * FROM VEHICLE";
+QString Vehicle::_getListSttm = "SELECT * FROM VEHICULE";
 
 Vehicle::Vehicle()
 {

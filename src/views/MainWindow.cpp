@@ -13,8 +13,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_save_clicked()
+void MainWindow::on_load_clicked()
 {
-    Client client = ui->view->getClient();
-    client.addToDB();
+    auto list = Vehicle::getList();
+    ui->view->setVehicleList(list);
+    ui->view->displayList();
 }

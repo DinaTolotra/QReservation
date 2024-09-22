@@ -27,9 +27,11 @@ void VehicleListView::displayList()
     row = col = 0;
 
     for (Vehicle veh: _vehList) {
-        qint32 num = veh.getNum(),
-               nbPlace = veh.getNbPlace(),
-               nbPlaceDispo = veh.getNbPlaceDispo();
+        qint32 num = veh.getNum();
+        qint32 nbPlace = veh.getNbPlace();
+        qint32 nbPlaceDispo = veh.getNbPlaceDispo();
+
+        ui->vehicleTable->setRowCount(row+1);
 
         QTableWidgetItem *numItem = new QTableWidgetItem(QString::number(num));
         QTableWidgetItem *nbPlaceItem = new QTableWidgetItem(QString::number(nbPlace));
