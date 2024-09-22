@@ -3,6 +3,9 @@
 
 #include <QGroupBox>
 
+#include "src/models/Booking/Booking.hpp"
+
+
 namespace Ui {
 class BookingView;
 }
@@ -15,7 +18,10 @@ public:
     explicit BookingView(QWidget *parent = nullptr);
     ~BookingView();
 
+    Booking getBooking();
+
 private:
+    Booking _booking;
     Ui::BookingView *ui;
 };
 

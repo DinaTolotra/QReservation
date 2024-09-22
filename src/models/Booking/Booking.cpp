@@ -4,7 +4,7 @@ Booking::Booking()
 {
     _insertSttm = "INSERT INTO RESERVATION VALUE"
                   "(:num, :veh, :cli, :dep, :res, :total, :avance, :place)";
-    _getLastNumSttm = "SELECT MAX(NUMCLI) FROM RESERVATION";
+    _getLastNumSttm = "SELECT MAX(NUMRES) FROM RESERVATION";
 }
 
 
@@ -24,18 +24,18 @@ bool Booking::addToDB()
     if (_num == 0) _num = getLastNum() + 1;
 
     Database db;
-    auto *query = db.getQuerry();
-    query->prepare(_insertSttm);
-    query->bindValue(":num", _num);
-    query->bindValue(":veh", _numVeh);
-    query->bindValue(":cli", _numClient);
-    query->bindValue(":dep", _dateDep.toString("yy-mm-dd"));
-    query->bindValue(":res", _dateRes.toString("yy-mm-dd"));
-    query->bindValue(":total", _fraisTotal);
-    query->bindValue(":avance", _avance);
-    query->bindValue(":place", _numPlace);
+    auto *querry = db.getQuerry();
+    querry->prepare(_insertSttm);
+    querry->bindValue(":num", _num);
+    querry->bindValue(":veh", _numVeh);
+    querry->bindValue(":cli", _numClient);
+    querry->bindValue(":dep", _dateDep.toString("yy-MM-dd"));
+    querry->bindValue(":res", _dateRes.toString("yy-MM-dd"));
+    querry->bindValue(":total", _fraisTotal);
+    querry->bindValue(":avance", _avance);
+    querry->bindValue(":place", _numPlace);
 
-    return query->exec();
+    return querry->exec();
 }
 
 

@@ -4,6 +4,8 @@
 #include <QDate>
 #include <QString>
 
+#include <QSqlError>
+
 #include "src/models/Entity.hpp"
 
 

@@ -22,10 +22,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
-
-    void on_load_clicked();
-
 private:
     Ui::MainWindow *ui;
 
