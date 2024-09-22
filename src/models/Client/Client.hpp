@@ -23,8 +23,6 @@ public:
 
     qint32 getLastNum();
 
-    qint32 getLastNum();
-
     bool addToDB();
 
     // Getter
