@@ -15,6 +15,33 @@ VehicleListView::~VehicleListView()
 }
 
 
+void VehicleListView::setVehicleList(QMap<qint32, Vehicle> vehicleList)
+{
+    _vehList = vehicleList;
+}
+
+
+void VehicleListView::displayList()
+{
+    int row, col;
+    row = col = 0;
+
+    for (Vehicle veh: _vehList) {
+        qint32 num = veh.getNum(),
+               nbPlace = veh.getNbPlace(),
+               nbPlaceDispo = veh.getNbPlaceDispo();
+
+        QTableWidgetItem *numItem = new QTableWidgetItem(QString::number(num));
+        QTableWidgetItem *nbPlaceItem = new QTableWidgetItem(QString::number(nbPlace));
+        QTableWidgetItem *nbPlaceDispoItem = new QTableWidgetItem(QString::number(nbPlaceDispo));
+
+        ui->vehicleTable->setItem(row, col=0, numItem);
+        ui->vehicleTable->setItem(row, ++col, nbPlaceItem);
+        ui->vehicleTable->setItem(row++, ++col, nbPlaceDispoItem);
+    }
+}
+
+
 void VehicleListView::setUserChoiceHandler()
 {
     connect(ui->vehicleTable, &QTableWidget::cellDoubleClicked,
@@ -29,9 +56,9 @@ qint32 VehicleListView::getRowVehicleNum(qint32 row)
 }
 
 
-void VehicleListView::handleVehicleChoice(qint32 row, qint32 col)
+void VehicleListView::handleVehicleChoice(qint32 row)
 {
     qint32 numveh = getRowVehicleNum(row);
-    if (!vehicleList.contains(numveh)) return;
-    emit vehicleChoosed(vehicleList[numveh]);
+    if (!_vehList.contains(numveh)) return;
+    emit vehicleChoosed(_vehList[numveh]);
 }
