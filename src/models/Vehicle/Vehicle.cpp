@@ -1,5 +1,7 @@
 #include "Vehicle.hpp"
 
+QString Vehicle::_getListSttm = "SELECT * FROM VEHICLE";
+
 Vehicle::Vehicle()
 {
     _deleteSttm = "DELETE FROM VEHICULE WHERE NUMVEH=:num";
@@ -12,7 +14,8 @@ Vehicle::Vehicle()
 
 qint32 Vehicle::getLastNum()
 {
-    auto *query = _db.getQuerry();
+    Database db;
+    auto *query = db.getQuerry();
     query->exec(_getLastNumSttm);
     query->next();
 
@@ -20,11 +23,39 @@ qint32 Vehicle::getLastNum()
 }
 
 
+QMap<qint32, Vehicle> Vehicle::getList()
+{
+    QMap<qint32, Vehicle> vehList;
+
+    Database db;
+    auto *querry = db.getQuerry();
+    querry->exec(_getListSttm);
+
+    while (querry->next()) {
+        qint32 num, nbPlace, nbPlaceDispo;
+        Vehicle veh;
+
+        num = querry->value("NUMVEH").toInt();
+        nbPlace = querry->value("NBPLACE").toInt();
+        nbPlaceDispo = querry->value("NBPLACEDISPO").toInt();
+
+        veh.setNum(num);
+        veh.setNbPlace(nbPlace);
+        veh.setNbPlaceDispo(nbPlaceDispo);
+
+        vehList[num] = veh;
+    }
+
+    return vehList;
+}
+
+
 bool Vehicle::addToDB()
 {
     if (_num == 0) _num = getLastNum() + 1;
 
-    auto *query = _db.getQuerry();
+    Database db;
+    auto *query = db.getQuerry();
     query->prepare(_insertSttm);
     query->bindValue(":num", _num);
     query->bindValue(":nbPlace", _nbPlace);

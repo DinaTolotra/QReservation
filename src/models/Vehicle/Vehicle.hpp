@@ -1,6 +1,7 @@
 #ifndef VEHICLE_HPP
 #define VEHICLE_HPP
 
+#include <QtCore/QMap>
 #include "../Entity.hpp"
 
 class Vehicle : public Entity
@@ -11,6 +12,7 @@ public:
     qint32 getLastNum();
 
     bool addToDB();
+    static QMap<qint32, Vehicle> getList();
 
     // Getter
     qint32 getNum() const;
@@ -24,6 +26,7 @@ public:
 
 private:
     QString _getLastNumSttm;
+    static QString _getListSttm;
 
     qint32 _num;
     qint32 _nbPlace;
