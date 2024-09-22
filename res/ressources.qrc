@@ -3,4 +3,8 @@
         <file>icons/man.svg</file>
         <file>icons/woman.svg</file>
     </qresource>
+    <qresource prefix="/images">
+        <file>images/bus_1.png</file>
+        <file>images/bus_2.png</file>
+    </qresource>
 </RCC>
