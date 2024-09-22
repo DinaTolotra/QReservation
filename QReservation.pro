@@ -17,6 +17,7 @@ SOURCES += \
     src/models/Client/Client.cpp \
     src/models/Entity.cpp \
     src/models/Vehicle/Vehicle.cpp \
+    src/views/Booking/BookingView.cpp \
     src/views/Client/ClientView.cpp \
     src/views/MainWindow.cpp \
     src/models/Database.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 HEADERS += \
     src/models/Client/Client.hpp \
     src/models/Vehicle/Vehicle.hpp \
+    src/views/Booking/BookingView.hpp \
     src/views/Client/ClientView.hpp \
     src/views/MainWindow.hpp \
     src/models/Database.hpp \
@@ -33,6 +35,7 @@ HEADERS += \
 
 
 FORMS += \
+    src/views/Booking/BookingView.ui \
     src/views/Client/ClientView.ui \
     src/views/MainWindow.ui \
     src/views/VehicleList/VehicleListView.ui
