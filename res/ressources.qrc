@@ -5,6 +5,8 @@
     </qresource>
     <qresource prefix="/images">
         <file>images/bus_1.png</file>
-        <file>images/bus_2.png</file>
+        <file>images/bus_1_64.png</file>
+        <file>images/bus_0.png</file>
+        <file>images/bus_0_64.png</file>
     </qresource>
 </RCC>

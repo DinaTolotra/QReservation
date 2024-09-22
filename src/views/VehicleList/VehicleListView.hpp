@@ -28,13 +28,14 @@ public:
 private:
     void setUserChoiceHandler();
 
-    qint32 getRowVehicleNum(qint32 row);
+    qint32 getVehicleNumInRow(qint32 row);
 
 signals:
     void vehicleChoosed(Vehicle veh);
 
 private slots:
     void handleVehicleChoice(qint32 row);
+    void displayChoice(Vehicle veh);
 
 private:
     Ui::VehicleListView *ui;

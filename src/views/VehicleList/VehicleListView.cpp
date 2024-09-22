@@ -51,16 +51,34 @@ void VehicleListView::setUserChoiceHandler()
 }
 
 
-qint32 VehicleListView::getRowVehicleNum(qint32 row)
+qint32 VehicleListView::getVehicleNumInRow(qint32 row)
 {
-    QTableWidgetItem *cellWgt = ui->vehicleTable->itemAt(0, row);
+    QTableWidgetItem *cellWgt = ui->vehicleTable->item(row, 0);
     return cellWgt->text().toInt();
 }
 
 
 void VehicleListView::handleVehicleChoice(qint32 row)
 {
-    qint32 numveh = getRowVehicleNum(row);
-    if (!_vehList.contains(numveh)) return;
-    emit vehicleChoosed(_vehList[numveh]);
+    qint32 numVeh = getVehicleNumInRow(row);
+    if (!_vehList.contains(numVeh)) return;
+    Vehicle veh =_vehList[numVeh];
+    emit vehicleChoosed(veh);
+    displayChoice(veh);
+}
+
+
+void VehicleListView::displayChoice(Vehicle veh)
+{
+    qint32 num = veh.getNum();
+    qint32 nbPlace = veh.getNbPlace();
+    qint32 nbPlaceDispo = veh.getNbPlaceDispo();
+    QString imgPath = ":/images/images/bus_?_64.png";
+
+    imgPath.replace("?", QString::number(num % 2));
+
+    ui->vehImg->setPixmap(QPixmap(imgPath));
+    ui->vehNumDisp->display(num);
+    ui->placeDisp->display(nbPlace);
+    ui->freePlaceDisp->display(nbPlaceDispo);
 }
