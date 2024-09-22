@@ -19,7 +19,8 @@ SOURCES += \
     src/models/Vehicle/Vehicle.cpp \
     src/views/Client/ClientView.cpp \
     src/views/MainWindow.cpp \
-    src/models/Database.cpp
+    src/models/Database.cpp \
+    src/views/VehicleList/VehicleListView.cpp
 
 HEADERS += \
     src/models/Client/Client.hpp \
@@ -27,12 +28,14 @@ HEADERS += \
     src/views/Client/ClientView.hpp \
     src/views/MainWindow.hpp \
     src/models/Database.hpp \
-    src/models/Entity.hpp
+    src/models/Entity.hpp \
+    src/views/VehicleList/VehicleListView.hpp
 
 
 FORMS += \
     src/views/Client/ClientView.ui \
-    src/views/MainWindow.ui
+    src/views/MainWindow.ui \
+    src/views/VehicleList/VehicleListView.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
