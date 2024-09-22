@@ -17,7 +17,6 @@ protected:
     Entity();
 
 protected:
-    Database _db;
     QString _selectSttm;
     QString _insertSttm;
     QString _updateSttm;

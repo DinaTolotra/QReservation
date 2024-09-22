@@ -15,7 +15,8 @@ Client::Client()
 
 qint32 Client::getLastNum()
 {
-    auto *query = _db.getQuerry();
+    Database db;
+    auto *query = db.getQuerry();
     query->exec(_getLastNumSttm);
     query->next();
 
@@ -32,7 +33,8 @@ bool Client::addToDB()
     }
     if (_num == 0) _num = getLastNum() + 1;
 
-    auto *query = _db.getQuerry();
+    Database db;
+    auto *query = db.getQuerry();
     query->prepare(_insertSttm);
     query->bindValue(":num", _num);
     query->bindValue(":nom", _nom);
