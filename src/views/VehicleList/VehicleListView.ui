@@ -87,7 +87,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="userChoice">
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -105,7 +105,7 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_6">
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="vehImg">
         <property name="minimumSize">
          <size>
           <width>64</width>
@@ -139,14 +139,14 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
-             <widget class="QLabel" name="label_2">
+             <widget class="QLabel" name="lbl">
               <property name="text">
                <string>Vehicule n°</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLCDNumber" name="lcdNumber">
+             <widget class="QLCDNumber" name="vehNumDisp">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -158,7 +158,7 @@
            </layout>
           </item>
           <item>
-           <spacer name="horizontalSpacer">
+           <spacer name="spc">
             <property name="orientation">
              <enum>Qt::Orientation::Horizontal</enum>
             </property>
@@ -184,7 +184,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QLabel" name="label_3">
+             <widget class="QLabel" name="lbl_2">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -197,7 +197,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLCDNumber" name="lcdNumber_2">
+             <widget class="QLCDNumber" name="placeDisp">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -211,14 +211,14 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
-             <widget class="QLabel" name="label_4">
+             <widget class="QLabel" name="lbl_3">
               <property name="text">
                <string>Disponible:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLCDNumber" name="lcdNumber_3">
+             <widget class="QLCDNumber" name="freePlaceDisp">
               <property name="minimumSize">
                <size>
                 <width>0</width>
