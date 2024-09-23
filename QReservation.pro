@@ -13,26 +13,28 @@ INCLUDEPATH += \
     src/views/Client
 
 SOURCES += \
+    src/controllers/MainController.cpp \
     src/main.cpp \
+    src/views/MainWindow.cpp \
+    src/models/Database.cpp \
+    src/models/Entity.cpp \
     src/models/Booking/Booking.cpp \
     src/models/Client/Client.cpp \
-    src/models/Entity.cpp \
     src/models/Vehicle/Vehicle.cpp \
     src/views/Booking/BookingView.cpp \
     src/views/Client/ClientView.cpp \
-    src/views/MainWindow.cpp \
-    src/models/Database.cpp \
     src/views/VehicleList/VehicleListView.cpp
 
 HEADERS += \
+    src/controllers/MainController.hpp \
+    src/views/MainWindow.hpp \
+    src/models/Database.hpp \
+    src/models/Entity.hpp \
     src/models/Booking/Booking.hpp \
     src/models/Client/Client.hpp \
     src/models/Vehicle/Vehicle.hpp \
     src/views/Booking/BookingView.hpp \
     src/views/Client/ClientView.hpp \
-    src/views/MainWindow.hpp \
-    src/models/Database.hpp \
-    src/models/Entity.hpp \
     src/views/VehicleList/VehicleListView.hpp
 
 

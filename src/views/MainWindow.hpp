@@ -19,11 +19,31 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    enum Page {
+        WELCOME = 0,
+        BOOKING = 1
+    };
+
+public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void gotoPage(Page page);
+
+private:
+    void setDefaultConfiguration();
+    void setPageChangeEventHandler();
+
+signals:
+    void requestPageChange(Page from, Page to);
+
+private slots:
+    void handlePageChangeRequest(Page from, Page to);
+
 private:
     Ui::MainWindow *ui;
+
+    Page _currentPage;
 
 };
 #endif // MAINWINDOW_HPP
