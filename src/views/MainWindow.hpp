@@ -31,14 +31,11 @@ public:
     void gotoPage(Page page);
 
 private:
-    void setDefaultConfiguration();
     void setPageChangeEventHandler();
+    void setBookingProcessSignalTunnel();
 
 signals:
-    void requestPageChange(Page from, Page to);
-
-private slots:
-    void handlePageChangeRequest(Page from, Page to);
+    void requestPageChange(Page from, Pagek to);
 
 private:
     Ui::MainWindow *ui;

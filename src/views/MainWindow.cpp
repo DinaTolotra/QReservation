@@ -7,8 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
     , _currentPage(WELCOME)
 {
     ui->setupUi(this);
-    setDefaultConfiguration();
     setPageChangeEventHandler();
+    gotoPage(_currentPage);
 }
 
 
@@ -25,24 +25,12 @@ void MainWindow::gotoPage(Page page)
 }
 
 
-void MainWindow::setDefaultConfiguration()
-{
-    ui->mainStack->setCurrentIndex(_currentPage);
-}
-
-
 void MainWindow::setPageChangeEventHandler()
 {
-    connect(ui->homeBtn, &QPushButton::clicked, [this]() -> void {
-        this->handlePageChangeRequest(this->_currentPage, WELCOME);
+    connect(ui->homeBtn, &QPushButton::clicked,[this]() -> void {
+        emit this->requestPageChange(this->_currentPage, WELCOME);
     });
     connect(ui->bookingBtn, &QPushButton::clicked, [this]() -> void {
-        this->handlePageChangeRequest(this->_currentPage, BOOKING);
+        emit this->requestPageChange(this->_currentPage, BOOKING);
     });
-}
-
-
-void MainWindow::handlePageChangeRequest(Page from, Page to)
-{
-    emit requestPageChange(from, to);
 }

@@ -22,6 +22,7 @@ private:
 
 private slots:
     void changeMainWindowPage(MainWindow::Page from, MainWindow::Page to);
+    void changeBookingProcessPage();
 
 private:
     MainWindow *_win;

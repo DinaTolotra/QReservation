@@ -121,25 +121,13 @@
        <layout class="QVBoxLayout" name="verticalLayout_3"/>
       </widget>
       <widget class="QWidget" name="bookingCreationPage">
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="BookingProcess" name="bookingProcess"/>
-        </item>
-       </layout>
+       <layout class="QVBoxLayout" name="verticalLayout"/>
       </widget>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>BookingProcess</class>
-   <extends>QStackedWidget</extends>
-   <header>src/views/BookingProcess/BookingProcess.hpp</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../../res/ressources.qrc"/>
  </resources>
