@@ -15,6 +15,7 @@ INCLUDEPATH += \
 SOURCES += \
     src/controllers/MainController.cpp \
     src/main.cpp \
+    src/views/BookingProcess/BookingProcess.cpp \
     src/views/MainWindow.cpp \
     src/models/Database.cpp \
     src/models/Entity.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 
 HEADERS += \
     src/controllers/MainController.hpp \
+    src/views/BookingProcess/BookingProcess.hpp \
     src/views/MainWindow.hpp \
     src/models/Database.hpp \
     src/models/Entity.hpp \
@@ -40,6 +42,7 @@ HEADERS += \
 
 FORMS += \
     src/views/Booking/BookingView.ui \
+    src/views/BookingProcess/BookingProcess.ui \
     src/views/Client/ClientView.ui \
     src/views/MainWindow.ui \
     src/views/VehicleList/VehicleListView.ui

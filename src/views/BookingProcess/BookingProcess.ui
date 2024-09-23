@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BookingProcess</class>
+ <widget class="QStackedWidget" name="BookingProcess">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>538</width>
+    <height>518</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>StackedWidget</string>
+  </property>
+  <widget class="QWidget" name="bookingPage">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="BookingView" name="bookingForm">
+      <property name="title">
+       <string>Réservation</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="clientPage">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="ClientView" name="clientForm">
+      <property name="title">
+       <string>GroupBox</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="vehiclePage">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <widget class="VehicleListView" name="vehicleForm">
+      <property name="title">
+       <string>Vehicule</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VehicleListView</class>
+   <extends>QGroupBox</extends>
+   <header>src/views/VehicleList/VehicleListView.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BookingView</class>
+   <extends>QGroupBox</extends>
+   <header>src/views/Booking/BookingView.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ClientView</class>
+   <extends>QGroupBox</extends>
+   <header>src/views/Client/ClientView.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
