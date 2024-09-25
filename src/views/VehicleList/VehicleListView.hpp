@@ -25,6 +25,8 @@ public:
 
     void displayList();
 
+    Vehicle getVehicle();
+
 private:
     void setUserChoiceHandler();
 
@@ -40,6 +42,7 @@ private slots:
 private:
     Ui::VehicleListView *ui;
     QMap<qint32, Vehicle> _vehList;
+    Vehicle _veh;
 };
 
 #endif // VEHICLELISTVIEW_HPP

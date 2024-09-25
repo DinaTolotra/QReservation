@@ -4,6 +4,8 @@
 #include <QDate>
 #include <QString>
 
+#include <QSqlError>
+
 #include "src/models/Entity.hpp"
 
 
@@ -13,8 +15,12 @@ public:
     Booking();
 
     bool addToDB();
+    bool addDateDepToDB();
 
     qint32 getLastNum();
+    void syncNumIfNot();
+
+    bool isValid();
 
     // Getter
     qint32 getNum() const;
@@ -39,6 +45,7 @@ public:
 
 private:
     QString _getLastNumSttm;
+    QString _insertDateResSttm;
 
     qint32 _num;
     qint32 _numClient;

@@ -9,6 +9,7 @@ BookingProcess::BookingProcess(QWidget *parent)
     ui->setupUi(this);
     setPageChangeEventHandler();
     gotoPage(_currentPage);
+    loadViewData();
 }
 
 
@@ -25,6 +26,24 @@ void BookingProcess::gotoPage(Page page)
 }
 
 
+
+Booking BookingProcess::getBooking()
+{
+    return ui->bookingForm->getBooking();
+}
+
+Client BookingProcess::getClient()
+{
+    return ui->clientForm->getClient();
+}
+
+Vehicle BookingProcess::getVehicle()
+{
+    return ui->vehicleForm->getVehicle();
+}
+
+
+
 void BookingProcess::setPageChangeEventHandler()
 {
     connect(ui->resNextBtn, &QPushButton::clicked, [this]() -> void {
@@ -36,3 +55,12 @@ void BookingProcess::setPageChangeEventHandler()
     connect(ui->saveBtn, &QPushButton::clicked,
             this, &BookingProcess::saveBookingRequest);
 }
+
+
+void BookingProcess::loadViewData()
+{
+    auto list = Vehicle::getList();
+    ui->vehicleForm->setVehicleList(list);
+    ui->vehicleForm->displayList();
+}
+

@@ -21,9 +21,12 @@ class Client : public Entity
 public:
     Client();
 
-    qint32 getLastNum();
-
     bool addToDB();
+
+    qint32 getLastNum();
+    void syncNumIfNot();
+
+    bool isValid();
 
     // Getter
     qint32 getNum() const;

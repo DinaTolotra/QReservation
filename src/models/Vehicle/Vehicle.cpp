@@ -7,7 +7,8 @@ Vehicle::Vehicle()
     _deleteSttm = "DELETE FROM VEHICULE WHERE NUMVEH=:num";
     _insertSttm = "INSERT INTO VEHICULE VALUE (:num, :nbPlace, :nbPDispo)";
     _selectSttm = "SELECT FROM VEHICULE WHERE NUMVEH=:num";
-    _updateSttm = "UPDATE VEHICULE SET NBPLACE=:nbPlace, NBPLACEDISPO=:nbPDispo";
+    _updateSttm = "UPDATE VEHICULE SET NBPLACE=:nbPlace, NBPLACEDISPO=:nbPDispo"
+                  "WHERE NUMVEH=:num";
     _getLastNumSttm = "SELECT MAX(NUMVEH) FROM VEHICULE";
 }
 
@@ -15,11 +16,17 @@ Vehicle::Vehicle()
 qint32 Vehicle::getLastNum()
 {
     Database db;
-    auto *query = db.getQuerry();
+    auto *query = db.getQuery();
     query->exec(_getLastNumSttm);
     query->next();
 
     return query->value(0).toInt();
+}
+
+
+void Vehicle::syncNumIfNot()
+{
+    if (_num == 0) _num = getLastNum() + 1;
 }
 
 
@@ -28,7 +35,7 @@ QMap<qint32, Vehicle> Vehicle::getList()
     QMap<qint32, Vehicle> vehList;
 
     Database db;
-    auto *querry = db.getQuerry();
+    auto *querry = db.getQuery();
     querry->exec(_getListSttm);
 
     while (querry->next()) {
@@ -50,13 +57,30 @@ QMap<qint32, Vehicle> Vehicle::getList()
 }
 
 
+bool Vehicle::isValid()
+{
+    return _num > 0 && _nbPlaceDispo > 0;
+}
+
+
 bool Vehicle::addToDB()
 {
-    if (_num == 0) _num = getLastNum() + 1;
-
     Database db;
-    auto *query = db.getQuerry();
+    auto *query = db.getQuery();
     query->prepare(_insertSttm);
+    query->bindValue(":num", _num);
+    query->bindValue(":nbPlace", _nbPlace);
+    query->bindValue(":nbPDispo", _nbPlaceDispo);
+
+    return query->exec();
+}
+
+
+bool Vehicle::upadteDB()
+{
+    Database db;
+    auto *query = db.getQuery();
+    query->prepare(_updateSttm);
     query->bindValue(":num", _num);
     query->bindValue(":nbPlace", _nbPlace);
     query->bindValue(":nbPDispo", _nbPlaceDispo);
@@ -93,4 +117,10 @@ qint32 Vehicle::getNbPlaceDispo() const
 void Vehicle::setNbPlaceDispo(qint32 nbPlaceDispo)
 {
     _nbPlaceDispo = nbPlaceDispo;
+}
+
+
+void Vehicle::decrementFreePlace()
+{
+    if (_nbPlaceDispo > 0) _nbPlaceDispo--;
 }

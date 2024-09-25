@@ -3,9 +3,11 @@
 
 #include <QObject>
 #include <QString>
+#include <stdexcept>
 
 #include "src/models/Database.hpp"
 #include "src/views/MainWindow.hpp"
+#include "BookingProcessController/BookingProcessController.hpp"
 
 
 class MainController : public QObject
@@ -17,15 +19,19 @@ public:
     void exec();
 
 private:
-    void createWindow();
+    bool createWindow();
     void setupConnection();
 
+    bool initBookingProcess();
+    bool stopBookingProcess();
+
 private slots:
-    void changeMainWindowPage(MainWindow::Page from, MainWindow::Page to);
-    void changeBookingProcessPage();
+    void changePage(MainWindow::Page from, MainWindow::Page to);
 
 private:
     MainWindow *_win;
+
+    BookingProcessController *_BPController;
 
 };
 

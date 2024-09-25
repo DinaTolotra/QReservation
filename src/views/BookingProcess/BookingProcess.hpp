@@ -3,6 +3,11 @@
 
 #include <QStackedWidget>
 
+#include "src/models/Client/Client.hpp"
+#include "src/models/Booking/Booking.hpp"
+#include "src/models/Vehicle/Vehicle.hpp"
+
+
 namespace Ui {
 class BookingProcess;
 }
@@ -24,8 +29,14 @@ public:
 
     void gotoPage(Page page);
 
+    Booking getBooking();
+    Client getClient();
+    Vehicle getVehicle();
+
+
 private:
     void setPageChangeEventHandler();
+    void loadViewData();
 
 signals:
     void requestPageChange(Page from, Page to);

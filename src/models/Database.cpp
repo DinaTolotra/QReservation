@@ -9,7 +9,7 @@ Database::Database()
 {}
 
 
-QSqlQuery *Database::getQuerry()
+QSqlQuery *Database::getQuery()
 {
     return query;
 }

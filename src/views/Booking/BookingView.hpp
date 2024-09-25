@@ -21,6 +21,13 @@ public:
     Booking getBooking();
 
 private:
+    void setAvanceSync();
+    void setDateValue();
+
+private slots:
+    void syncReste(qint32 avance);
+
+private:
     Booking _booking;
     Ui::BookingView *ui;
 };

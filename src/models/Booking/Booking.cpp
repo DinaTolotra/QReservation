@@ -5,13 +5,14 @@ Booking::Booking()
     _insertSttm = "INSERT INTO RESERVATION VALUE"
                   "(:num, :veh, :cli, :dep, :res, :total, :avance, :place)";
     _getLastNumSttm = "SELECT MAX(NUMRES) FROM RESERVATION";
+    _insertDateResSttm = "INSERT INTO CALENDRIER VALUE (:res)";
 }
 
 
 qint32 Booking::getLastNum()
 {
     Database db;
-    auto *query = db.getQuerry();
+    auto *query = db.getQuery();
     query->exec(_getLastNumSttm);
     query->next();
 
@@ -19,23 +20,57 @@ qint32 Booking::getLastNum()
 }
 
 
-bool Booking::addToDB()
+void Booking::syncNumIfNot()
 {
     if (_num == 0) _num = getLastNum() + 1;
+}
 
+
+bool Booking::isValid()
+{
+    bool ok = true;
+
+    ok = ok && _num > 0;
+    ok = ok && _dateDep > _dateRes;
+
+    return ok;
+}
+
+
+bool Booking::addToDB()
+{
     Database db;
-    auto *querry = db.getQuerry();
-    querry->prepare(_insertSttm);
-    querry->bindValue(":num", _num);
-    querry->bindValue(":veh", _numVeh);
-    querry->bindValue(":cli", _numClient);
-    querry->bindValue(":dep", _dateDep.toString("yy-MM-dd"));
-    querry->bindValue(":res", _dateRes.toString("yy-MM-dd"));
-    querry->bindValue(":total", _fraisTotal);
-    querry->bindValue(":avance", _avance);
-    querry->bindValue(":place", _numPlace);
+    auto *query = db.getQuery();
+    query->prepare(_insertSttm);
+    query->bindValue(":num", _num);
+    query->bindValue(":veh", _numVeh);
+    query->bindValue(":cli", _numClient);
+    query->bindValue(":dep", _dateDep.toString("yy-MM-dd"));
+    query->bindValue(":res", _dateRes.toString("yy-MM-dd"));
+    query->bindValue(":total", _fraisTotal);
+    query->bindValue(":avance", _avance);
+    query->bindValue(":place", _numPlace);
 
-    return querry->exec();
+    bool ok = query->exec();
+
+    if (!ok) qDebug() << query->lastError();
+
+    return ok;
+}
+
+
+bool Booking::addDateDepToDB()
+{
+    Database db;
+    auto *query = db.getQuery();
+    query->prepare(_insertDateResSttm);
+    query->bindValue(":res", _dateDep.toString("yy-MM-dd"));
+
+    bool ok = query->exec();
+
+    if (!ok) qDebug() << query->lastError();
+
+    return ok;
 }
 
 

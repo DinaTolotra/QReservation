@@ -17,7 +17,7 @@ class Database
 public:
     Database();
 
-    QSqlQuery* getQuerry();
+    QSqlQuery* getQuery();
     static void setupDatabase();
     static void closeDatabase();
 

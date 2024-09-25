@@ -25,9 +25,16 @@ void MainWindow::gotoPage(Page page)
 }
 
 
+void MainWindow::setBookingProcessView(BookingProcess *BPView)
+{
+    auto *BPLyt = ui->BPContainer->layout();
+    BPLyt->addWidget(BPView);
+}
+
+
 void MainWindow::setPageChangeEventHandler()
 {
-    connect(ui->homeBtn, &QPushButton::clicked,[this]() -> void {
+    connect(ui->homeBtn, &QPushButton::clicked, [this]() -> void {
         emit this->requestPageChange(this->_currentPage, WELCOME);
     });
     connect(ui->bookingBtn, &QPushButton::clicked, [this]() -> void {

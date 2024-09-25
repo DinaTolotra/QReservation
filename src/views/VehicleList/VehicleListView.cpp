@@ -44,6 +44,12 @@ void VehicleListView::displayList()
 }
 
 
+Vehicle VehicleListView::getVehicle()
+{
+    return _veh;
+}
+
+
 void VehicleListView::setUserChoiceHandler()
 {
     connect(ui->vehicleTable, &QTableWidget::cellDoubleClicked,
@@ -65,6 +71,7 @@ void VehicleListView::handleVehicleChoice(qint32 row)
     Vehicle veh =_vehList[numVeh];
     emit vehicleChoosed(veh);
     displayChoice(veh);
+    _veh = veh;
 }
 
 

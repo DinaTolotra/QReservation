@@ -16,7 +16,7 @@ Client::Client()
 qint32 Client::getLastNum()
 {
     Database db;
-    auto *query = db.getQuerry();
+    auto *query = db.getQuery();
     query->exec(_getLastNumSttm);
     query->next();
 
@@ -24,17 +24,27 @@ qint32 Client::getLastNum()
 }
 
 
+void Client::syncNumIfNot()
+{
+    if (_num == 0) _num = getLastNum() + 1;
+}
+
+
+bool Client::isValid()
+{
+    bool ok = true;
+
+    ok = ok && _num > 0;
+    ok = ok && _telephone != "+261000000000";
+
+    return ok;
+}
+
+
 bool Client::addToDB()
 {
-    if (_nom.isEmpty())
-    {
-        qDebug() << "Client: Empty name";
-        return false;
-    }
-    if (_num == 0) _num = getLastNum() + 1;
-
     Database db;
-    auto *query = db.getQuerry();
+    auto *query = db.getQuery();
     query->prepare(_insertSttm);
     query->bindValue(":num", _num);
     query->bindValue(":nom", _nom);

@@ -4,8 +4,9 @@
 #include <QMainWindow>
 #include <QtCore/QDebug>
 
-#include "Client.hpp"
-#include "ClientView.hpp"
+#include "src/models/Client/Client.hpp"
+#include "src/views/Client/ClientView.hpp"
+#include "src/views/BookingProcess/BookingProcess.hpp"
 
 
 QT_BEGIN_NAMESPACE
@@ -30,12 +31,13 @@ public:
 
     void gotoPage(Page page);
 
+    void setBookingProcessView(BookingProcess *BPView);
+
 private:
     void setPageChangeEventHandler();
-    void setBookingProcessSignalTunnel();
 
 signals:
-    void requestPageChange(Page from, Pagek to);
+    void requestPageChange(MainWindow::Page from, MainWindow::Page to);
 
 private:
     Ui::MainWindow *ui;

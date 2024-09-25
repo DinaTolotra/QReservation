@@ -10,9 +10,13 @@ public:
     Vehicle();
 
     qint32 getLastNum();
+    void syncNumIfNot();
 
     bool addToDB();
+    bool upadteDB();
     static QMap<qint32, Vehicle> getList();
+
+    bool isValid();
 
     // Getter
     qint32 getNum() const;
@@ -23,6 +27,8 @@ public:
     void setNum(qint32 num);
     void setNbPlace(qint32 nbPlace);
     void setNbPlaceDispo(qint32 nbPlaceDispo);
+
+    void decrementFreePlace();
 
 private:
     QString _getLastNumSttm;

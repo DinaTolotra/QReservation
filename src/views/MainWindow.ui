@@ -121,7 +121,13 @@
        <layout class="QVBoxLayout" name="verticalLayout_3"/>
       </widget>
       <widget class="QWidget" name="bookingCreationPage">
-       <layout class="QVBoxLayout" name="verticalLayout"/>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QWidget" name="BPContainer" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_5"/>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
