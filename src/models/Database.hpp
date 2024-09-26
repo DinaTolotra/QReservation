@@ -10,6 +10,7 @@
 // Database library
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include <QtSql/QSqlError>
 
 
 class Database

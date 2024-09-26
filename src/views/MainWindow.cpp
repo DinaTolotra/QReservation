@@ -32,6 +32,19 @@ void MainWindow::setBookingProcessView(BookingProcess *BPView)
 }
 
 
+
+void MainWindow::warnUser(QString message)
+{
+    QMessageBox::warning(nullptr, "Warning", message);
+}
+
+
+void MainWindow::informUser(QString message)
+{
+    QMessageBox::information(nullptr, "Info", message);
+}
+
+
 void MainWindow::setPageChangeEventHandler()
 {
     connect(ui->homeBtn, &QPushButton::clicked, [this]() -> void {

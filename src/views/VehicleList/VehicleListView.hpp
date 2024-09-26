@@ -3,8 +3,9 @@
 
 #include <QGroupBox>
 #include <QLabel>
-#include <QPair>
-#include <QMap>
+#include <QtCore/QPair>
+#include <QtCore/QMap>
+#include <QtCore/QDate>
 
 #include "src/models/Vehicle/Vehicle.hpp"
 

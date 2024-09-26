@@ -23,6 +23,8 @@ void VehicleListView::setVehicleList(QMap<qint32, Vehicle> vehicleList)
 
 void VehicleListView::displayList()
 {
+    ui->vehicleTable->clearContents();
+
     int row, col;
     row = col = 0;
 

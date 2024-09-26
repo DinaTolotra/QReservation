@@ -42,11 +42,12 @@ bool BookingProcessController::getBookingData()
     _booking = _BPView->getBooking();
     _booking.setDateRes(QDate::currentDate());
     _booking.syncNumIfNot();
+
     if (_booking.isValid()) {
         _booking.setFraisTotal(50000);
         return true;
     } else {
-        qDebug() << "Invalid booking data";
+        _win->warnUser("Invalid booking data");
         return false;
     }
 }
@@ -56,16 +57,42 @@ bool BookingProcessController::getClientData()
 {
     _client = _BPView->getClient();
     _client.syncNumIfNot();
+
     if (_client.isValid()) {
+        // display the list of vehicle
+        //      with the filtered data
+        displayVehicleList();
         return true;
     } else {
-        qDebug() << "Invalid client data";
+        _win->warnUser("Invalid client data");
         return false;
     }
 }
 
 
-void BookingProcessController::changePage(BookingProcess::Page from, BookingProcess::Page to)
+void BookingProcessController::displayVehicleList()
+{
+    QMap<qint32, Vehicle> list = Vehicle::getList();
+    QMap<qint32, Vehicle> filteredList;
+    QDate dateDep = _booking.getDateDep();
+
+    for (Vehicle veh: list) {
+        qint32 num = veh.getNum();
+        QDate vehDateDep = veh.getDateDep();
+        bool validDate = vehDateDep == dateDep;
+        validDate = validDate || !vehDateDep.isValid();
+
+        if (validDate) filteredList[num] = veh;
+    }
+
+    _BPView->setVehicleData(filteredList);
+}
+
+
+void BookingProcessController::changePage(
+    BookingProcess::Page from,
+    BookingProcess::Page to
+    )
 {
     if (from == to) return;
 
@@ -105,4 +132,7 @@ void BookingProcessController::saveBooking()
     if (!_client.addToDB()) return;
     if (!_booking.addToDB()) return;
     if (!_veh.upadteDB()) return;
+
+    _win->informUser("Reservation effectuée!");
+    changePage(BookingProcess::VEHICLE, BookingProcess::BOOKING);
 }

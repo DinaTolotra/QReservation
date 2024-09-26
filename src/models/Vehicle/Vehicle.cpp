@@ -6,10 +6,12 @@ Vehicle::Vehicle()
 {
     _deleteSttm = "DELETE FROM VEHICULE WHERE NUMVEH=:num";
     _insertSttm = "INSERT INTO VEHICULE VALUE (:num, :nbPlace, :nbPDispo)";
-    _selectSttm = "SELECT FROM VEHICULE WHERE NUMVEH=:num";
-    _updateSttm = "UPDATE VEHICULE SET NBPLACE=:nbPlace, NBPLACEDISPO=:nbPDispo"
-                  "WHERE NUMVEH=:num";
+    _selectSttm = "SELECT * FROM VEHICULE WHERE NUMVEH = :num";
+    _updateSttm = "UPDATE VEHICULE SET NBPLACE=:nbPlace, NBPLACEDISPO=:nbPDispo "
+                  "WHERE NUMVEH = :num";
     _getLastNumSttm = "SELECT MAX(NUMVEH) FROM VEHICULE";
+    _getDateDepSttm = "SELECT DATEDEPART FROM RESERVATION "
+                      "WHERE NUMVEH = :num";
 }
 
 
@@ -63,6 +65,23 @@ bool Vehicle::isValid()
 }
 
 
+QDate Vehicle::getDateDep()
+{
+    Database db;
+    auto query = db.getQuery();
+    query->prepare(_getDateDepSttm);
+    query->bindValue(":num", _num);
+
+    bool ok = query->exec();
+    query->next();
+
+    if (!ok) qDebug() << query->lastError();
+    else return query->value("DATEDEPART").toDate();
+
+    return QDate(0, 0, 0);
+}
+
+
 bool Vehicle::addToDB()
 {
     Database db;
@@ -72,7 +91,11 @@ bool Vehicle::addToDB()
     query->bindValue(":nbPlace", _nbPlace);
     query->bindValue(":nbPDispo", _nbPlaceDispo);
 
-    return query->exec();
+    bool ok = query->exec();
+
+    if (!ok) qDebug() << query->lastError();
+
+    return ok;
 }
 
 

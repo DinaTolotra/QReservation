@@ -33,10 +33,11 @@ public:
     Client getClient();
     Vehicle getVehicle();
 
+    void setVehicleData(QMap<qint32, Vehicle> vehList);
+    void displayVehicleList();
 
 private:
     void setPageChangeEventHandler();
-    void loadViewData();
 
 signals:
     void requestPageChange(Page from, Page to);

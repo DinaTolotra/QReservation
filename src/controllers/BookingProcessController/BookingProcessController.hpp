@@ -25,8 +25,13 @@ private:
     bool getBookingData();
     bool getClientData();
 
+    void displayVehicleList();
+
 private slots:
-    void changePage(BookingProcess::Page from, BookingProcess::Page to);
+    void changePage(
+        BookingProcess::Page from,
+        BookingProcess::Page to
+        );
     void saveBooking();
 
 private:

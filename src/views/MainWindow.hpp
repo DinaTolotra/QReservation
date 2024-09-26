@@ -2,6 +2,7 @@
 #define MAINWINDOW_HPP
 
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QtCore/QDebug>
 
 #include "src/models/Client/Client.hpp"
@@ -32,6 +33,9 @@ public:
     void gotoPage(Page page);
 
     void setBookingProcessView(BookingProcess *BPView);
+
+    void warnUser(QString message);
+    void informUser(QString message);
 
 private:
     void setPageChangeEventHandler();

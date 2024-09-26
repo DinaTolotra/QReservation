@@ -2,6 +2,7 @@
 #define VEHICLE_HPP
 
 #include <QtCore/QMap>
+#include <QtCore/QDate>
 #include "../Entity.hpp"
 
 class Vehicle : public Entity
@@ -18,6 +19,8 @@ public:
 
     bool isValid();
 
+    QDate getDateDep();
+
     // Getter
     qint32 getNum() const;
     qint32 getNbPlace() const;
@@ -32,6 +35,7 @@ public:
 
 private:
     QString _getLastNumSttm;
+    QString _getDateDepSttm;
     static QString _getListSttm;
 
     qint32 _num;
