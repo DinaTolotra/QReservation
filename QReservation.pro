@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT       += core gui sql printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,8 +13,12 @@ INCLUDEPATH += \
     src/views/Client
 
 SOURCES += \
+    src/controllers/BookingListProcessController/BookingListProcessController.cpp \
+    src/controllers/BookingProcessController/ticket.cpp \
+    src/controllers/subController.cpp \
     src/main.cpp \
     src/controllers/MainController.cpp \
+    src/views/BookingList/BookingListView.cpp \
     src/views/BookingProcess/BookingProcess.cpp \
     src/controllers/BookingProcessController/BookingProcessController.cpp \
     src/views/MainWindow.cpp \
@@ -28,7 +32,9 @@ SOURCES += \
     src/views/VehicleList/VehicleListView.cpp
 
 HEADERS += \
+    src/controllers/BookingListProcessController/BookingListProcessController.hpp \
     src/controllers/MainController.hpp \
+    src/views/BookingList/BookingListView.hpp \
     src/views/BookingProcess/BookingProcess.hpp \
     src/controllers/BookingProcessController/BookingProcessController.hpp \
     src/views/MainWindow.hpp \
@@ -44,6 +50,7 @@ HEADERS += \
 
 FORMS += \
     src/views/Booking/BookingView.ui \
+    src/views/BookingList/BookingListView.ui \
     src/views/BookingProcess/BookingProcess.ui \
     src/views/Client/ClientView.ui \
     src/views/MainWindow.ui \

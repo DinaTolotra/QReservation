@@ -1,14 +1,12 @@
 #include "Client.hpp"
 
+QString Client::_getListSttm = "SELECT * FROM CLIENT";
+
 Client::Client()
     : Entity()
     , _num(0)
 {
-    _deleteSttm = "DELETE FROM CLIENT WHERE NUMCLI=:num";
     _insertSttm = "INSERT INTO CLIENT VALUE (:num, :nom, :sexe, :adr, :tel)";
-    _selectSttm = "SELECT FROM CLIENT WHERE NUMCLI=:num";
-    _updateSttm = "UPDATE CLIENT SET NOM=:nom, ADRESSE=:adr,"
-                  "SEXE=:sexe, TEL=:tel WHERE NUMCLI=:num";
     _getLastNumSttm = "SELECT MAX(NUMCLI) FROM CLIENT";
 }
 
@@ -27,6 +25,36 @@ qint32 Client::getLastNum()
 void Client::syncNumIfNot()
 {
     if (_num == 0) _num = getLastNum() + 1;
+}
+
+
+QMap<qint32, Client> Client::getList()
+{
+    QMap<qint32, Client> clientList;
+
+    Database db;
+    auto *query = db.getQuery();
+    query->exec(_getListSttm);
+
+    while (query->next()) {
+        Client client;
+
+        qint32 num = query->value("NUMCLI").toInt();
+        QString nom = query->value("NOM").toString();
+        QChar c_sexe = query->value("SEXE").toString()[0];
+        QString adresse = query->value("ADRESSE").toString();
+        QString tel = query->value("TEL").toString();
+
+        client.setNum(num);
+        client.setNom(nom);
+        client.setSexe(charToSexe(c_sexe));
+        client.setAdresse(adresse);
+        client.setTelephone(tel);
+
+        clientList.insert(num, client);
+    }
+
+    return clientList;
 }
 
 

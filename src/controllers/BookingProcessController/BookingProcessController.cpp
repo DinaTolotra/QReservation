@@ -21,8 +21,9 @@ void BookingProcessController::initControlFor(MainWindow *win)
         _BPView = new BookingProcess();
     }
 
-    qDebug() << "Initializing booking process";
-    win->setBookingProcessView(_BPView);
+    _win = win;
+
+    _win->setBookingProcessView(_BPView);
     setConnectionToBP();
 }
 
@@ -36,6 +37,7 @@ void BookingProcessController::setConnectionToBP()
     connect(_BPView, &BookingProcess::saveBookingRequest,
             this, &BookingProcessController::saveBooking);
 }
+
 
 bool BookingProcessController::getBookingData()
 {
@@ -113,6 +115,7 @@ void BookingProcessController::changePage(
 }
 
 
+
 void BookingProcessController::saveBooking()
 {
     _veh = _BPView->getVehicle();
@@ -135,4 +138,6 @@ void BookingProcessController::saveBooking()
 
     _win->informUser("Reservation effectuée!");
     changePage(BookingProcess::VEHICLE, BookingProcess::BOOKING);
+
+    createTicket();
 }

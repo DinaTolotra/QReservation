@@ -3,6 +3,7 @@
 MainController::MainController(QObject *parent)
     : QObject{parent}
     , _BPController(nullptr)
+    , _BLController(nullptr)
 {
     Database::setupDatabase();
     createWindow();
@@ -39,40 +40,6 @@ void MainController::setupConnection()
 }
 
 
-bool MainController::initBookingProcess()
-{
-    if (_win == nullptr)
-        throw std::runtime_error(
-            "Main window not created"
-            );
-
-    if (_BPController != nullptr)
-        throw std::runtime_error(
-            "Booking process controller not deleted"
-            );
-
-    _BPController = new BookingProcessController();
-    _BPController->initControlFor(_win);
-
-    bool ok = _BPController != nullptr;
-
-    return ok;
-}
-
-
-bool MainController::stopBookingProcess()
-{
-    if (_BPController == nullptr) return false;
-
-    delete _BPController;
-    _BPController = nullptr;
-
-    bool ok = _BPController == nullptr;
-
-    return ok;
-}
-
-
 void MainController::changePage(MainWindow::Page from, MainWindow::Page to)
 {
     if (to == from) return;
@@ -81,9 +48,15 @@ void MainController::changePage(MainWindow::Page from, MainWindow::Page to)
     switch (to) {
     case MainWindow::WELCOME:
         stopBookingProcess();
+        stopBookingListProcess();
         break;
     case MainWindow::BOOKING:
+        stopBookingListProcess();
         initBookingProcess();
+        break;
+    case MainWindow::LIST:
+        stopBookingProcess();
+        initBookingListProcess();
         break;
     }
 }

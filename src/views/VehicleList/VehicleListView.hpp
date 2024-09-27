@@ -23,14 +23,13 @@ public:
     ~VehicleListView();
 
     void setVehicleList(QMap<qint32, Vehicle> vehicleList);
-
     void displayList();
 
     Vehicle getVehicle();
 
 private:
+    void setTableStyle();
     void setUserChoiceHandler();
-
     qint32 getVehicleNumInRow(qint32 row);
 
 signals:

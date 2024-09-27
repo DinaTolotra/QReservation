@@ -6,6 +6,7 @@ VehicleListView::VehicleListView(QWidget *parent)
     , ui(new Ui::VehicleListView)
 {
     ui->setupUi(this);
+    setTableStyle();
     setUserChoiceHandler();
 }
 
@@ -49,6 +50,13 @@ void VehicleListView::displayList()
 Vehicle VehicleListView::getVehicle()
 {
     return _veh;
+}
+
+
+void VehicleListView::setTableStyle()
+{
+    auto *headerView = ui->vehicleTable->horizontalHeader();
+    headerView->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 

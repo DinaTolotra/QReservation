@@ -6,6 +6,8 @@
 
 #include "src/models/Database.hpp"
 #include "src/models/Client/Client.hpp"
+#include "src/models/Booking/Booking.hpp"
+#include "src/models/Vehicle/Vehicle.hpp"
 
 #include "src/views/MainWindow.hpp"
 #include "src/views/BookingProcess/BookingProcess.hpp"
@@ -26,6 +28,8 @@ private:
     bool getClientData();
 
     void displayVehicleList();
+
+    void createTicket();
 
 private slots:
     void changePage(

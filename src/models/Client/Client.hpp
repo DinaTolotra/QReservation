@@ -3,6 +3,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QDebug>
+#include <QtCore/QMap>
 
 #include "../Entity.hpp"
 
@@ -25,6 +26,7 @@ public:
 
     qint32 getLastNum();
     void syncNumIfNot();
+    static QMap<qint32, Client> getList();
 
     bool isValid();
 
@@ -45,6 +47,7 @@ public:
 
 private:
     QString _getLastNumSttm;
+    static QString _getListSttm;
 
     qint32 _num;
     QString _nom;

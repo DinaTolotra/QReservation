@@ -1,11 +1,13 @@
 #include "Booking.hpp"
 
+QString Booking::_getListSttm = "SELECT * FROM RESERVATION";
+
 Booking::Booking()
 {
     _insertSttm = "INSERT INTO RESERVATION VALUE"
                   "(:num, :veh, :cli, :dep, :res, :total, :avance, :place)";
-    _getLastNumSttm = "SELECT MAX(NUMRES) FROM RESERVATION";
     _insertDateResSttm = "INSERT INTO CALENDRIER VALUE (:res)";
+    _getLastNumSttm = "SELECT MAX(NUMRES) FROM RESERVATION";
 }
 
 
@@ -23,6 +25,42 @@ qint32 Booking::getLastNum()
 void Booking::syncNumIfNot()
 {
     if (_num == 0) _num = getLastNum() + 1;
+}
+
+
+QMap<qint32, Booking> Booking::getList()
+{
+    QMap<qint32, Booking> bookingList;
+
+    Database db;
+    auto *query = db.getQuery();
+    query->exec(_getListSttm);
+
+    while (query->next()) {
+        Booking booking;
+
+        qint32 num = query->value("NUMRES").toInt();
+        qint32 numVeh = query->value("NUMVEH").toInt();
+        qint32 numCli = query->value("NUMCLI").toInt();
+        QDate dateDep = query->value("DATEDEPART").toDate();
+        QDate dateRes = query->value("DATERES").toDate();
+        qint32 frais = query->value("FRAISTOTAL").toInt();
+        qint32 avance = query->value("AVANCE").toInt();
+        qint32 place = query->value("NUMPLACE").toInt();
+
+        booking.setNum(num);
+        booking.setNumVeh(numVeh);
+        booking.setNumClient(numCli);
+        booking.setDateDep(dateDep);
+        booking.setDateRes(dateRes);
+        booking.setFraisTotal(frais);
+        booking.setAvance(avance);
+        booking.setNumPlace(place);
+
+        bookingList[num] = booking;
+    }
+
+    return bookingList;
 }
 
 

@@ -7,11 +7,15 @@
         <file>icons/save.svg</file>
         <file>icons/chevron-right.svg</file>
         <file>icons/chevrons-right.svg</file>
+        <file>icons/list.svg</file>
+        <file>icons/edit-3.svg</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/bus_1.png</file>
         <file>images/bus_1_64.png</file>
         <file>images/bus_0.png</file>
         <file>images/bus_0_64.png</file>
+        <file>images/logo.png</file>
+        <file>images/logo_128.png</file>
     </qresource>
 </RCC>

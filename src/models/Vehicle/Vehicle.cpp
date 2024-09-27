@@ -37,16 +37,16 @@ QMap<qint32, Vehicle> Vehicle::getList()
     QMap<qint32, Vehicle> vehList;
 
     Database db;
-    auto *querry = db.getQuery();
-    querry->exec(_getListSttm);
+    auto *query = db.getQuery();
+    query->exec(_getListSttm);
 
-    while (querry->next()) {
+    while (query->next()) {
         qint32 num, nbPlace, nbPlaceDispo;
         Vehicle veh;
 
-        num = querry->value("NUMVEH").toInt();
-        nbPlace = querry->value("NBPLACE").toInt();
-        nbPlaceDispo = querry->value("NBPLACEDISPO").toInt();
+        num = query->value("NUMVEH").toInt();
+        nbPlace = query->value("NBPLACE").toInt();
+        nbPlaceDispo = query->value("NBPLACEDISPO").toInt();
 
         veh.setNum(num);
         veh.setNbPlace(nbPlace);

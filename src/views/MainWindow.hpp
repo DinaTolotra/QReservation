@@ -8,6 +8,7 @@
 #include "src/models/Client/Client.hpp"
 #include "src/views/Client/ClientView.hpp"
 #include "src/views/BookingProcess/BookingProcess.hpp"
+#include "src/views/BookingList/BookingListView.hpp"
 
 
 QT_BEGIN_NAMESPACE
@@ -23,7 +24,8 @@ class MainWindow : public QMainWindow
 public:
     enum Page {
         WELCOME = 0,
-        BOOKING = 1
+        BOOKING = 1,
+        LIST = 2
     };
 
 public:
@@ -33,6 +35,7 @@ public:
     void gotoPage(Page page);
 
     void setBookingProcessView(BookingProcess *BPView);
+    void setBookingListView(BookingListView *BLView);
 
     void warnUser(QString message);
     void informUser(QString message);

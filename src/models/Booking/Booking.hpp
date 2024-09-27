@@ -19,6 +19,7 @@ public:
 
     qint32 getLastNum();
     void syncNumIfNot();
+    static QMap<qint32, Booking> getList();
 
     bool isValid();
 
@@ -45,6 +46,7 @@ public:
 
 private:
     QString _getLastNumSttm;
+    static QString _getListSttm;
     QString _insertDateResSttm;
 
     qint32 _num;

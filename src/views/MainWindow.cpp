@@ -32,16 +32,22 @@ void MainWindow::setBookingProcessView(BookingProcess *BPView)
 }
 
 
+void MainWindow::setBookingListView(BookingListView *BLView)
+{
+    auto BLLyt = ui->bookingListPage->layout();
+    BLLyt->addWidget(BLView);
+}
+
 
 void MainWindow::warnUser(QString message)
 {
-    QMessageBox::warning(nullptr, "Warning", message);
+    QMessageBox::warning(this, "Warning", message);
 }
 
 
 void MainWindow::informUser(QString message)
 {
-    QMessageBox::information(nullptr, "Info", message);
+    QMessageBox::information(this, "Info", message);
 }
 
 
@@ -52,5 +58,8 @@ void MainWindow::setPageChangeEventHandler()
     });
     connect(ui->bookingBtn, &QPushButton::clicked, [this]() -> void {
         emit this->requestPageChange(this->_currentPage, BOOKING);
+    });
+    connect(ui->listBtn, &QPushButton::clicked, [this]() -> void {
+        emit this->requestPageChange(this->_currentPage, LIST);
     });
 }
