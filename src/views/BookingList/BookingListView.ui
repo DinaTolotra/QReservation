@@ -30,17 +30,22 @@
      </attribute>
      <column>
       <property name="text">
-       <string>Numéros</string>
+       <string>N°</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Nom client</string>
+       <string>Client</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Place</string>
+       <string>N° Vehicule</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Date départ</string>
       </property>
      </column>
      <column>
@@ -55,38 +60,8 @@
      </column>
     </widget>
    </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <spacer name="spc">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="modifBtn">
-       <property name="text">
-        <string>Modifier</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../../res/ressources.qrc">
-         <normaloff>:/icons/icons/edit-3.svg</normaloff>:/icons/icons/edit-3.svg</iconset>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../../res/ressources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

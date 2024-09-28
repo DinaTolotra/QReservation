@@ -24,6 +24,12 @@ public:
     void displayList();
 
 private:
+    void handleChangeRequest();
+
+private slots:
+    void setupBookingProcessDataForModif(Booking booking);
+
+private:
     MainWindow *_win;
     BookingListView *_BLView;
 

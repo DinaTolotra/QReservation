@@ -3,6 +3,7 @@
 QString Booking::_getListSttm = "SELECT * FROM RESERVATION";
 
 Booking::Booking()
+    : _num(0)
 {
     _insertSttm = "INSERT INTO RESERVATION VALUE"
                   "(:num, :veh, :cli, :dep, :res, :total, :avance, :place)";
@@ -18,7 +19,13 @@ qint32 Booking::getLastNum()
     query->exec(_getLastNumSttm);
     query->next();
 
-    return query->value(0).toInt();
+    bool ok;
+
+    QVariant v_num = query->value("MAX(NUMRES)");
+    qint32 num = v_num.toInt(&ok);
+
+    if (ok) return num;
+    else return 0;
 }
 
 
@@ -69,7 +76,7 @@ bool Booking::isValid()
     bool ok = true;
 
     ok = ok && _num > 0;
-    ok = ok && _dateDep > _dateRes;
+    ok = ok && _dateDep >= _dateRes;
 
     return ok;
 }

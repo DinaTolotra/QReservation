@@ -43,10 +43,10 @@ bool BookingProcessController::getBookingData()
 {
     _booking = _BPView->getBooking();
     _booking.setDateRes(QDate::currentDate());
+    _booking.setFraisTotal(50000);
     _booking.syncNumIfNot();
 
     if (_booking.isValid()) {
-        _booking.setFraisTotal(50000);
         return true;
     } else {
         _win->warnUser("Invalid booking data");
@@ -83,6 +83,7 @@ void BookingProcessController::displayVehicleList()
         QDate vehDateDep = veh.getDateDep();
         bool validDate = vehDateDep == dateDep;
         validDate = validDate || !vehDateDep.isValid();
+        validDate = validDate && veh.getNbPlaceDispo() > 0;
 
         if (validDate) filteredList[num] = veh;
     }

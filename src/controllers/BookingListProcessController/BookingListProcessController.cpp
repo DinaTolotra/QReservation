@@ -37,3 +37,18 @@ void BookingListProcessController::displayList()
 
     _BLView->displayList();
 }
+
+
+void BookingListProcessController::handleChangeRequest()
+{
+    connect(_BLView, &BookingListView::requestForModification,
+            this, &BookingListProcessController::setupBookingProcessDataForModif);
+}
+
+
+void BookingListProcessController::setupBookingProcessDataForModif(Booking booking)
+{
+    auto clientList = Client::getList();
+    Client client = clientList[booking.getNumClient()];
+
+}

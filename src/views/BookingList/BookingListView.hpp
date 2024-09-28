@@ -27,6 +27,14 @@ public:
 
 private:
     void setTableStyle();
+    qint32 getNumListAtRow(qint32 row);
+    void setUserSelectionHandler();
+
+signals:
+    void requestForModification(Booking booking);
+
+private slots:
+    void handleBookingSelection(qint32 row);
 
 private:
     Ui::BookingListView *ui;

@@ -18,7 +18,13 @@ qint32 Client::getLastNum()
     query->exec(_getLastNumSttm);
     query->next();
 
-    return query->value(0).toInt();
+    bool ok;
+
+    QVariant v_num = query->value("MAX(NUMCLI)");
+    qint32 num = v_num.toInt(&ok);
+
+    if (ok) return num;
+    else return 0;
 }
 
 

@@ -21,6 +21,8 @@ Booking BookingView::getBooking()
     qint32 place = ui->placeIn->value();
     qint32 avance = ui->avanceIn->value();
 
+    qDebug() << "Date départ: " << dateDep;
+
     _booking.setDateDep(dateDep);
     _booking.setNumPlace(place);
     _booking.setAvance(avance);
