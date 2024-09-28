@@ -23,6 +23,8 @@ public:
     Client();
 
     bool addToDB();
+    bool updateDB();
+    bool deleteDB();
 
     qint32 getLastNum();
     void syncNumIfNot();

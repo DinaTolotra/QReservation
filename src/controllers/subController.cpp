@@ -3,14 +3,13 @@
 
 void MainController::initBookingProcess()
 {
-    if (_win == nullptr)
-        qDebug() << "Main window not created";
-    if (_BPController != nullptr)
-        qDebug() << "Booking process controller not deleted";
+    if (_win == nullptr) return;
+    if (_BPController != nullptr) return;
 
     _BPController = new BookingProcessController();
     _BPController->initControlFor(_win);
 }
+
 
 void MainController::stopBookingProcess()
 {
@@ -23,14 +22,13 @@ void MainController::stopBookingProcess()
 
 void MainController::initBookingListProcess()
 {
-    if (_win == nullptr)
-        qDebug() << "Main window not created";
-    if (_BLController != nullptr)
-        qDebug() << "Booking list controller not deleted";
+    if (_win == nullptr) return;
+    if (_BLController != nullptr) return;
 
     _BLController = new BookingListProcessController();
     _BLController->initControlFor(_win);
     _BLController->displayList();
+    setBookingModifHandler();
 }
 
 void MainController::stopBookingListProcess()
@@ -39,4 +37,11 @@ void MainController::stopBookingListProcess()
 
     delete _BLController;
     _BLController = nullptr;
+}
+
+
+void MainController::setBookingModifHandler()
+{
+    connect(_BLController, &BookingListProcessController::requestForModification,
+            this, &MainController::performModif);
 }

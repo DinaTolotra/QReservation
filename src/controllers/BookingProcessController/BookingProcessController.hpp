@@ -17,10 +17,22 @@ class BookingProcessController : public QObject
 {
     Q_OBJECT
 public:
+    enum State {
+        CREATING,
+        UPDATING
+    };
+
+public:
     explicit BookingProcessController(QObject *parent = nullptr);
     ~BookingProcessController();
 
     void initControlFor(MainWindow *win);
+
+    void setBooking(Booking booking);
+    void setClient(Client client);
+
+    void toCreatingState();
+    void toUpdatingState();
 
 private:
     void setConnectionToBP();
@@ -32,15 +44,14 @@ private:
     void createTicket();
 
 private slots:
-    void changePage(
-        BookingProcess::Page from,
-        BookingProcess::Page to
-        );
+    void changePage(BookingProcess::Page from, BookingProcess::Page to);
     void saveBooking();
 
 private:
     MainWindow *_win;
     BookingProcess *_BPView;
+
+    State _currentState;
 
     Booking _booking;
     Client _client;

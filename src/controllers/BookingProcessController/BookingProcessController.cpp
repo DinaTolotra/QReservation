@@ -3,6 +3,7 @@
 BookingProcessController::BookingProcessController(QObject *parent)
     : QObject{parent}
     , _BPView(nullptr)
+    , _currentState(State::CREATING)
 {}
 
 
@@ -28,6 +29,30 @@ void BookingProcessController::initControlFor(MainWindow *win)
 }
 
 
+void BookingProcessController::setBooking(Booking booking)
+{
+    _BPView->setBooking(booking);
+}
+
+
+void BookingProcessController::setClient(Client client)
+{
+    _BPView->setClient(client);
+}
+
+
+void BookingProcessController::toCreatingState()
+{
+    _currentState = State::CREATING;
+}
+
+
+void BookingProcessController::toUpdatingState()
+{
+    _currentState = State::UPDATING;
+}
+
+
 void BookingProcessController::setConnectionToBP()
 {
     if (_BPView == nullptr) return;
@@ -41,10 +66,12 @@ void BookingProcessController::setConnectionToBP()
 
 bool BookingProcessController::getBookingData()
 {
-    _booking = _BPView->getBooking();
-    _booking.setDateRes(QDate::currentDate());
-    _booking.setFraisTotal(50000);
-    _booking.syncNumIfNot();
+    qint32 num = _booking.getNum();             //  store num if it's for updating
+    _booking = _BPView->getBooking();           //  get inputed data
+    _booking.setDateRes(QDate::currentDate());  //
+    _booking.setFraisTotal(50000);              //
+    if (num != 0) _booking.setNum(num);         //  if num are valid then reset it to the booking
+    else _booking.syncNumIfNot();               //  else set a new num
 
     if (_booking.isValid()) {
         return true;
@@ -57,13 +84,13 @@ bool BookingProcessController::getBookingData()
 
 bool BookingProcessController::getClientData()
 {
-    _client = _BPView->getClient();
-    _client.syncNumIfNot();
+    qint32 num = _client.getNum();              //  store num if it's for updating
+    _client = _BPView->getClient();             //  get inputed data
+    if (num != 0) _client.setNum(num);          //  if num are valid then reset it to the client
+    else _client.syncNumIfNot();                //  else set a new num
 
     if (_client.isValid()) {
-        // display the list of vehicle
-        //      with the filtered data
-        displayVehicleList();
+        displayVehicleList();                   // display the list of filtered vehicle
         return true;
     } else {
         _win->warnUser("Invalid client data");
@@ -116,26 +143,35 @@ void BookingProcessController::changePage(
 }
 
 
-
 void BookingProcessController::saveBooking()
 {
     _veh = _BPView->getVehicle();
     _veh.syncNumIfNot();
 
-    if (!_veh.isValid() ) {
-        qDebug() << "Invalid vehicle data";
-        return;
+    if (!_veh.isValid() )
+        return _win->warnUser("Invalid vehicle data");
+
+    if (_currentState == State::UPDATING) {
+        qint32 numVeh = _booking.getNumVeh();
+        auto list = Vehicle::getList();
+        list[numVeh].incrementFreePlace();
+        list[numVeh].updateDB();
     }
 
     _booking.setNumVeh(_veh.getNum());
     _booking.setNumClient(_client.getNum());
-
     _veh.decrementFreePlace();
 
     _booking.addDateDepToDB();
-    if (!_client.addToDB()) return;
-    if (!_booking.addToDB()) return;
-    if (!_veh.upadteDB()) return;
+    if (_currentState == State::CREATING) {
+        if (!_client.addToDB()) return;
+        if (!_booking.addToDB()) return;
+        if (!_veh.updateDB()) return;
+    } else if (_currentState == State::UPDATING) {
+        if (!_client.updateDB()) return;
+        if (!_booking.updateDB()) return;
+        if (!_veh.updateDB()) return;
+    }
 
     _win->informUser("Reservation effectuée!");
     changePage(BookingProcess::VEHICLE, BookingProcess::BOOKING);

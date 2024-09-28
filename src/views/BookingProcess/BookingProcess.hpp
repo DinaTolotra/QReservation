@@ -29,6 +29,9 @@ public:
 
     void gotoPage(Page page);
 
+    void setBooking(Booking booking);
+    void setClient(Client client);
+
     Booking getBooking();
     Client getClient();
     Vehicle getVehicle();

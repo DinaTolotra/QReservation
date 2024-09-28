@@ -5,8 +5,11 @@ QString Booking::_getListSttm = "SELECT * FROM RESERVATION";
 Booking::Booking()
     : _num(0)
 {
-    _insertSttm = "INSERT INTO RESERVATION VALUE"
+    _insertSttm = "INSERT INTO RESERVATION VALUE "
                   "(:num, :veh, :cli, :dep, :res, :total, :avance, :place)";
+    _updateSttm = "UPDATE RESERVATION SET NUMVEH=:veh, DATEDEPART=:dep, DATERES=:res,"
+                  " AVANCE=:avance, NUMPLACE=:place WHERE NUMRES=:num";
+    _deleteSttm = "DELETE FROM RESERVATION WHERE NUMRES=:num";
     _insertDateResSttm = "INSERT INTO CALENDRIER VALUE (:res)";
     _getLastNumSttm = "SELECT MAX(NUMRES) FROM RESERVATION";
 }
@@ -95,6 +98,41 @@ bool Booking::addToDB()
     query->bindValue(":total", _fraisTotal);
     query->bindValue(":avance", _avance);
     query->bindValue(":place", _numPlace);
+
+    bool ok = query->exec();
+
+    if (!ok) qDebug() << query->lastError();
+
+    return ok;
+}
+
+
+bool Booking::updateDB()
+{
+    Database db;
+    auto *query = db.getQuery();
+    query->prepare(_updateSttm);
+    query->bindValue(":veh", _numVeh);
+    query->bindValue(":dep", _dateDep.toString("yy-MM-dd"));
+    query->bindValue(":res", _dateRes.toString("yy-MM-dd"));
+    query->bindValue(":avance", _avance);
+    query->bindValue(":place", _numPlace);
+    query->bindValue(":num", _num);
+
+    bool ok = query->exec();
+
+    if (!ok) qDebug() << query->lastError();
+
+    return ok;
+}
+
+
+bool Booking::deleteDB()
+{
+    Database db;
+    auto *query = db.getQuery();
+    query->prepare(_deleteSttm);
+    query->bindValue(":num", _num);
 
     bool ok = query->exec();
 

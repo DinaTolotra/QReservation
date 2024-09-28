@@ -19,6 +19,7 @@ public:
     ~BookingView();
 
     Booking getBooking();
+    void setBooking(Booking booking);
 
 private:
     void setAvanceSync();

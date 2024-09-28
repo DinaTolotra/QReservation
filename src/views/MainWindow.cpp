@@ -51,6 +51,18 @@ void MainWindow::informUser(QString message)
 }
 
 
+bool MainWindow::askUser(QString question)
+{
+    auto reponse = QMessageBox::critical(this, "Danger", question,
+                                         QMessageBox::StandardButton::Ok,
+                                         QMessageBox::StandardButton::Cancel);
+    if (reponse == QMessageBox::Ok)
+        return true;
+    return false;
+
+}
+
+
 void MainWindow::setPageChangeEventHandler()
 {
     connect(ui->homeBtn, &QPushButton::clicked, [this]() -> void {

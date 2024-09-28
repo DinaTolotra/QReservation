@@ -32,6 +32,23 @@ Client ClientView::getClient()
 }
 
 
+void ClientView::setClient(Client client)
+{
+    _client = client;
+
+    QString nom = client.getNom();
+    QString adresse = client.getAdresse();
+    QString tel = client.getTelephone();
+    qint32 sexe = client.getSexe();
+    tel.remove("+261");
+
+    ui->nomIn->setText(nom);
+    ui->addrIn->setText(adresse);
+    ui->telIn->setText(tel);
+    ui->sexeIn->setCurrentIndex(sexe);
+}
+
+
 QString ClientView::formatTelToMada(QString incompletTel)
 {
     incompletTel.remove(' ');

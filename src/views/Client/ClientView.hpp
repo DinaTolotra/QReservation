@@ -19,6 +19,7 @@ public:
     ~ClientView();
 
     Client getClient();
+    void setClient(Client client);
 
 private:
     static QString formatTelToMada(QString incompletTel);

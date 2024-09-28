@@ -60,3 +60,13 @@ void MainController::changePage(MainWindow::Page from, MainWindow::Page to)
         break;
     }
 }
+
+
+void MainController::performModif(Booking booking, Client client)
+{
+    changePage(MainWindow::LIST, MainWindow::BOOKING);
+    _BPController->setBooking(booking);
+    _BPController->setClient(client);
+    _BPController->toUpdatingState();
+}
+

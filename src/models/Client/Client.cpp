@@ -7,6 +7,9 @@ Client::Client()
     , _num(0)
 {
     _insertSttm = "INSERT INTO CLIENT VALUE (:num, :nom, :sexe, :adr, :tel)";
+    _updateSttm = "UPDATE CLIENT SET NOM=:nom, SEXE=:sexe, ADRESSE=:adr, TEL=:tel "
+                  " WHERE NUMCLI=:num";
+    _deleteSttm = "DELETE FROM CLIENT WHERE NUMCLI=:num";
     _getLastNumSttm = "SELECT MAX(NUMCLI) FROM CLIENT";
 }
 
@@ -86,7 +89,45 @@ bool Client::addToDB()
     query->bindValue(":sexe", sexeToChar(_sexe));
     query->bindValue(":tel", _telephone);
 
-    return query->exec();
+    bool ok = query->exec();
+
+    if (!ok) qDebug() << query->lastError();
+
+    return ok;
+}
+
+
+bool Client::updateDB()
+{
+    Database db;
+    auto *query = db.getQuery();
+    query->prepare(_updateSttm);
+    query->bindValue(":nom", _nom);
+    query->bindValue(":adr", _adresse);
+    query->bindValue(":sexe", sexeToChar(_sexe));
+    query->bindValue(":tel", _telephone);
+    query->bindValue(":num", _num);
+
+    bool ok = query->exec();
+
+    if (!ok) qDebug() << query->lastError();
+
+    return ok;
+}
+
+
+bool Client::deleteDB()
+{
+    Database db;
+    auto *query = db.getQuery();
+    query->prepare(_deleteSttm);
+    query->bindValue(":num", _num);
+
+    bool ok = query->exec();
+
+    if (!ok) qDebug() << query->lastError();
+
+    return ok;
 }
 
 

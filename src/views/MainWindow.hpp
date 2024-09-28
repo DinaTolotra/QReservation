@@ -39,6 +39,7 @@ public:
 
     void warnUser(QString message);
     void informUser(QString message);
+    bool askUser(QString question);
 
 private:
     void setPageChangeEventHandler();

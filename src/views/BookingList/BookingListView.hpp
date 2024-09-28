@@ -2,6 +2,7 @@
 #define BOOKINGLISTVIEW_HPP
 
 #include <QWidget>
+#include <QTableWidgetItem>
 
 #include "src/models/Client/Client.hpp"
 #include "src/models/Booking/Booking.hpp"
@@ -27,17 +28,24 @@ public:
 
 private:
     void setTableStyle();
+    void enableModifButton();
+    void disableModifButton();
     qint32 getNumListAtRow(qint32 row);
     void setUserSelectionHandler();
 
 signals:
-    void requestForModification(Booking booking);
+    void requestForModification(Booking booking, Client client);
+    void requestForDeletion(Booking booking, Client client);
 
 private slots:
     void handleBookingSelection(qint32 row);
+    void sendModifRequest();
+    void sendDeleteRequest();
 
 private:
     Ui::BookingListView *ui;
+    Client _client;
+    Booking _booking;
     QMap<qint32, Booking> _bookingList;
     QMap<qint32, Client> _clientList;
     QMap<qint32, Vehicle> _vehicleList;

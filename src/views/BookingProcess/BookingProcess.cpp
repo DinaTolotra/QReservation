@@ -37,6 +37,17 @@ void BookingProcess::gotoPage(Page page)
 }
 
 
+void BookingProcess::setBooking(Booking booking)
+{
+    ui->bookingForm->setBooking(booking);
+}
+
+
+void BookingProcess::setClient(Client client)
+{
+    ui->clientForm->setClient(client);
+}
+
 
 Booking BookingProcess::getBooking()
 {

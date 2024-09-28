@@ -15,6 +15,8 @@ public:
     Booking();
 
     bool addToDB();
+    bool updateDB();
+    bool deleteDB();
     bool addDateDepToDB();
 
     qint32 getLastNum();

@@ -14,7 +14,8 @@ public:
     void syncNumIfNot();
 
     bool addToDB();
-    bool upadteDB();
+    bool updateDB();
+    bool deleteDB();
     static QMap<qint32, Vehicle> getList();
 
     bool isValid();
@@ -31,6 +32,7 @@ public:
     void setNbPlace(qint32 nbPlace);
     void setNbPlaceDispo(qint32 nbPlaceDispo);
 
+    void incrementFreePlace();
     void decrementFreePlace();
 
 private:

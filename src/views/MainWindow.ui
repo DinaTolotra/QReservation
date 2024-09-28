@@ -6,15 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>673</height>
+    <width>738</width>
+    <height>615</height>
    </rect>
-  </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Gestion resérvation</string>
@@ -150,13 +144,29 @@
          </property>
         </widget>
        </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Policy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>300</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </widget>
     </item>
     <item>
      <widget class="QStackedWidget" name="mainStack">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="welcomePage">
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -257,7 +267,7 @@
               <item>
                <widget class="QLabel" name="logo">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>1</horstretch>
                   <verstretch>1</verstretch>
                  </sizepolicy>
@@ -287,8 +297,20 @@
               </item>
               <item>
                <widget class="QLabel" name="logoLbl">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>64</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
                 <property name="text">
-                 <string>TRANSPORT</string>
+                 <string>TRANSPORT TERRESTRE</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -300,14 +322,20 @@
            </item>
            <item row="0" column="1">
             <widget class="QLabel" name="welcomeLbl">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>64</height>
+              </size>
+             </property>
              <property name="font">
               <font>
-               <pointsize>18</pointsize>
+               <pointsize>22</pointsize>
                <bold>true</bold>
               </font>
              </property>
              <property name="text">
-              <string>BIENVENUE</string>
+              <string>GESTION DE RESERVATION</string>
              </property>
              <property name="textFormat">
               <enum>Qt::TextFormat::AutoText</enum>

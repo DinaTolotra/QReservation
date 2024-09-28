@@ -25,9 +25,13 @@ public:
 
 private:
     void handleChangeRequest();
+    void handleDeleteRequest();
+
+signals:
+    void requestForModification(Booking booking, Client client);
 
 private slots:
-    void setupBookingProcessDataForModif(Booking booking);
+    void processDeletion(Booking booking, Client client);
 
 private:
     MainWindow *_win;

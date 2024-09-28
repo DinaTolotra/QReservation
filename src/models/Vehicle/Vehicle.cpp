@@ -4,11 +4,11 @@ QString Vehicle::_getListSttm = "SELECT * FROM VEHICULE";
 
 Vehicle::Vehicle()
 {
-    _deleteSttm = "DELETE FROM VEHICULE WHERE NUMVEH=:num";
     _insertSttm = "INSERT INTO VEHICULE VALUE (:num, :nbPlace, :nbPDispo)";
     _selectSttm = "SELECT * FROM VEHICULE WHERE NUMVEH = :num";
     _updateSttm = "UPDATE VEHICULE SET NBPLACE=:nbPlace, NBPLACEDISPO=:nbPDispo "
                   "WHERE NUMVEH = :num";
+    _deleteSttm = "DELETE FROM VEHICULE WHERE NUMVEH=:num";
     _getLastNumSttm = "SELECT MAX(NUMVEH) FROM VEHICULE";
     _getDateDepSttm = "SELECT DATEDEPART FROM RESERVATION "
                       "WHERE NUMVEH = :num";
@@ -105,7 +105,7 @@ bool Vehicle::addToDB()
 }
 
 
-bool Vehicle::upadteDB()
+bool Vehicle::updateDB()
 {
     Database db;
     auto *query = db.getQuery();
@@ -113,6 +113,17 @@ bool Vehicle::upadteDB()
     query->bindValue(":num", _num);
     query->bindValue(":nbPlace", _nbPlace);
     query->bindValue(":nbPDispo", _nbPlaceDispo);
+
+    return query->exec();
+}
+
+
+bool Vehicle::deleteDB()
+{
+    Database db;
+    auto *query = db.getQuery();
+    query->prepare(_deleteSttm);
+    query->bindValue(":num", _num);
 
     return query->exec();
 }
@@ -146,6 +157,13 @@ qint32 Vehicle::getNbPlaceDispo() const
 void Vehicle::setNbPlaceDispo(qint32 nbPlaceDispo)
 {
     _nbPlaceDispo = nbPlaceDispo;
+}
+
+
+void Vehicle::incrementFreePlace()
+{
+    if (_nbPlaceDispo < _nbPlace)
+        _nbPlaceDispo++;
 }
 
 

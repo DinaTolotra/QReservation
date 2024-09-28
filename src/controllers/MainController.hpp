@@ -28,8 +28,11 @@ private:
     void initBookingListProcess();
     void stopBookingListProcess();
 
+    void setBookingModifHandler();
+
 private slots:
     void changePage(MainWindow::Page from, MainWindow::Page to);
+    void performModif(Booking booking, Client client);
 
 private:
     MainWindow *_win;

@@ -9,9 +9,7 @@
 class Entity
 {
 public:
-    virtual bool addToDB() = 0;/*
-    virtual bool updateIntoDB() = 0;
-    virtual bool removeIntoDB() = 0;*/
+    virtual bool addToDB() = 0;
 
 protected:
     Entity();

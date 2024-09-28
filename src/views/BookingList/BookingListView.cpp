@@ -7,6 +7,8 @@ BookingListView::BookingListView(QWidget *parent)
 {
     ui->setupUi(this);
     setTableStyle();
+    disableModifButton();
+    setUserSelectionHandler();
 }
 
 BookingListView::~BookingListView()
@@ -72,9 +74,23 @@ void BookingListView::setTableStyle()
 }
 
 
+void BookingListView::enableModifButton()
+{
+    ui->modifBtn->setEnabled(true);
+    ui->delBtn->setEnabled(true);
+}
+
+
+void BookingListView::disableModifButton()
+{
+    ui->modifBtn->setEnabled(false);
+    ui->delBtn->setEnabled(false);
+}
+
+
 qint32 BookingListView::getNumListAtRow(qint32 row)
 {
-    auto *numItem = ui->bookingTable->itemAt(0, row);
+    auto *numItem = ui->bookingTable->item(row, 0);
     QString str_num = numItem->text();
     return str_num.toInt();
 }
@@ -84,13 +100,30 @@ void BookingListView::setUserSelectionHandler()
 {
     connect(ui->bookingTable, &QTableWidget::cellDoubleClicked,
             this, &BookingListView::handleBookingSelection);
+    connect(ui->modifBtn, &QPushButton::clicked,
+            this, &BookingListView::sendModifRequest);
+    connect(ui->delBtn, &QPushButton::clicked,
+            this, &BookingListView::sendDeleteRequest);
 }
 
 
 void BookingListView::handleBookingSelection(qint32 row)
 {
     qint32 num = getNumListAtRow(row);
-    Booking selected = _bookingList[num];
-    emit requestForModification(selected);
+    _booking = _bookingList.value(num, Booking());
+    qint32 numCli = _booking.getNumClient();
+    _client = _clientList.value(numCli, Client());
+    enableModifButton();
 }
 
+
+void BookingListView::sendModifRequest()
+{
+    emit requestForModification(_booking, _client);
+}
+
+
+void BookingListView::sendDeleteRequest()
+{
+    emit requestForDeletion(_booking, _client);
+}
