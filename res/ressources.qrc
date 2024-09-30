@@ -10,6 +10,8 @@
         <file>icons/list.svg</file>
         <file>icons/edit-3.svg</file>
         <file>icons/trash-2.svg</file>
+        <file>icons/lock.svg</file>
+        <file>icons/user.svg</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/bus_1.png</file>
