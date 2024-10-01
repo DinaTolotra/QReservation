@@ -10,6 +10,7 @@ ClientList::ClientList(QWidget *parent)
     disableBookingBtn();
     disableDeleteBtn();
     setUserSelectionHandler();
+    setSearchRequestHandler();
 }
 
 ClientList::~ClientList()
@@ -27,6 +28,7 @@ void ClientList::setClientList(QMap<qint32, Client> cliList)
 void ClientList::displayList()
 {
     ui->clientTable->clearContents();
+    ui->clientTable->setRowCount(0);
 
     int row, col;
     row = col = 0;
@@ -86,6 +88,13 @@ void ClientList::setUserSelectionHandler()
 }
 
 
+void ClientList::setSearchRequestHandler()
+{
+    connect(ui->searchBtn, &QPushButton::clicked,
+            this, &ClientList::handleSearchRequest);
+}
+
+
 qint32 ClientList::getNumListAtRow(qint32 row)
 {
     auto *numItem = ui->clientTable->item(row, 0);
@@ -114,4 +123,11 @@ void ClientList::sendBookingRequest()
 void ClientList::sendDeleteRequest()
 {
     emit requestDeletionFor(_client);
+}
+
+
+void ClientList::handleSearchRequest()
+{
+    QString name = ui->searchIn->text();
+    emit requestNameFilter(name);
 }

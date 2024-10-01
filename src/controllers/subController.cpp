@@ -25,7 +25,7 @@ void MainController::initBookingListProcess()
     if (_win == nullptr) return;
     if (_BLController != nullptr) return;
 
-    _BLController = new BookingListProcessController();
+    _BLController = new BookingListController();
     _BLController->initControlFor(_win);
     _BLController->displayList();
     setBookingModifHandler();
@@ -84,7 +84,7 @@ void MainController::stopVehicleList()
 void MainController::setBookingModifHandler()
 {
     connect(
-        _BLController, &BookingListProcessController::requestModificationFor,
+        _BLController, &BookingListController::requestModifFor,
         this, &MainController::performModif
         );
 }

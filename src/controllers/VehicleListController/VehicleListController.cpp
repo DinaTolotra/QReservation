@@ -25,7 +25,7 @@ void VehicleListController::initControllerFor(MainWindow *win)
     }
 
     _win->setVehicleListView(_view);
-    setDateFilterHandler();
+    setFilterRequestHandler();
 }
 
 
@@ -38,7 +38,7 @@ void VehicleListController::displayList()
 }
 
 
-void VehicleListController::setDateFilterHandler()
+void VehicleListController::setFilterRequestHandler()
 {
     connect(_view, &VehicleListView::dateDepFilter,
             this, &VehicleListController::handleFilterRequest);
@@ -61,5 +61,5 @@ void VehicleListController::handleFilterRequest(QDate dateDep)
 
     _view->setVehicleList(filteredList);
     _view->displayList();
-    setDateFilterHandler();
+    setFilterRequestHandler();
 }

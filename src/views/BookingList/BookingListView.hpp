@@ -23,7 +23,6 @@ public:
 
     void setClientList(QMap<qint32, Client> list);
     void setBookingList(QMap<qint32, Booking> list);
-    void setVehicleList(QMap<qint32, Vehicle> list);
     void displayList();
 
 private:
@@ -31,16 +30,19 @@ private:
     void enableButton();
     void disableButton();
     void setUserSelectionHandler();
+    void setSearchRequestHandler();
     qint32 getNumListAtRow(qint32 row);
 
 signals:
     void requestModificationFor(Booking booking, Client client);
     void requestDeletionFor(Booking booking, Client client);
+    void requestCliNameFilter(QString cliName);
 
 private slots:
     void handleBookingSelection(qint32 row);
     void sendModifRequest();
     void sendDeleteRequest();
+    void handleSearchRequest();
 
 private:
     Ui::BookingListView *ui;
@@ -48,7 +50,6 @@ private:
     Booking _booking;
     QMap<qint32, Booking> _bookingList;
     QMap<qint32, Client> _clientList;
-    QMap<qint32, Vehicle> _vehicleList;
 };
 
 #endif // BOOKINGLISTVIEW_HPP

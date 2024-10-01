@@ -7,11 +7,11 @@ Booking::Booking()
 {
     _insertSttm = "INSERT INTO RESERVATION VALUE "
                   "(:num, :veh, :cli, :dep, :res, :total, :avance, :place)";
-    _updateSttm = "UPDATE RESERVATION SET NUMVEH=:veh, DATEDEPART=:dep, DATERES=:res,"
-                  " AVANCE=:avance, NUMPLACE=:place WHERE NUMRES=:num";
+    _updateSttm = "UPDATE RESERVATION SET NUMVEH=:veh, DATEDEPART=:dep, DATERES=:res, "
+                  "AVANCE=:avance, NUMPLACE=:place WHERE NUMRES=:num";
     _deleteSttm = "DELETE FROM RESERVATION WHERE NUMRES=:num";
     _insertDateResSttm = "INSERT INTO CALENDRIER VALUE (:res)";
-    _getLastNumSttm = "SELECT MAX(NUMRES) FROM RESERVATION";
+    _getLastNumSttm = "SELECT MAX(NUMRES) AS LASTNUM FROM RESERVATION";
 }
 
 
@@ -24,7 +24,7 @@ qint32 Booking::getLastNum()
 
     bool ok;
 
-    QVariant v_num = query->value("MAX(NUMRES)");
+    QVariant v_num = query->value("LASTNUM");
     qint32 num = v_num.toInt(&ok);
 
     if (ok) return num;
@@ -32,7 +32,7 @@ qint32 Booking::getLastNum()
 }
 
 
-void Booking::syncNumIfNot()
+void Booking::syncNum()
 {
     if (_num == 0) _num = getLastNum() + 1;
 }
@@ -51,7 +51,7 @@ QMap<qint32, Booking> Booking::getList()
 
         qint32 num = query->value("NUMRES").toInt();
         qint32 numVeh = query->value("NUMVEH").toInt();
-        qint32 numCli = query->value("NUMCLI").toInt();
+        qint32 cliNum = query->value("NUMCLI").toInt();
         QDate dateDep = query->value("DATEDEPART").toDate();
         QDate dateRes = query->value("DATERES").toDate();
         qint32 frais = query->value("FRAISTOTAL").toInt();
@@ -60,7 +60,7 @@ QMap<qint32, Booking> Booking::getList()
 
         booking.setNum(num);
         booking.setNumVeh(numVeh);
-        booking.setNumClient(numCli);
+        booking.setcliNum(cliNum);
         booking.setDateDep(dateDep);
         booking.setDateRes(dateRes);
         booking.setFraisTotal(frais);
@@ -92,7 +92,7 @@ bool Booking::addToDB()
     query->prepare(_insertSttm);
     query->bindValue(":num", _num);
     query->bindValue(":veh", _numVeh);
-    query->bindValue(":cli", _numClient);
+    query->bindValue(":cli", _cliNum);
     query->bindValue(":dep", _dateDep.toString("yy-MM-dd"));
     query->bindValue(":res", _dateRes.toString("yy-MM-dd"));
     query->bindValue(":total", _fraisTotal);
@@ -177,14 +177,14 @@ void Booking::setDateRes(const QDate &dateRes)
     _dateRes = dateRes;
 }
 
-qint32 Booking::getNumClient() const
+qint32 Booking::getcliNum() const
 {
-    return _numClient;
+    return _cliNum;
 }
 
-void Booking::setNumClient(qint32 numClient)
+void Booking::setcliNum(qint32 cliNum)
 {
-    _numClient = numClient;
+    _cliNum = cliNum;
 }
 
 QDate Booking::getDateDep() const

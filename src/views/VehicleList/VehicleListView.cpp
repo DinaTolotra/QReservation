@@ -27,6 +27,7 @@ void VehicleListView::setVehicleList(QMap<qint32, Vehicle> vehicleList)
 void VehicleListView::displayList()
 {
     ui->vehicleTable->clearContents();
+    ui->vehicleTable->setRowCount(0);
 
     int row, col;
     row = col = 0;
@@ -85,7 +86,7 @@ void VehicleListView::setUserChoiceHandler()
 void VehicleListView::setSearchRequestHandler()
 {
     connect(ui->searchBtn, &QPushButton::clicked,
-            this, &VehicleListView::handlesearchRequest);
+            this, &VehicleListView::handleSearchRequest);
 }
 
 
@@ -126,7 +127,7 @@ void VehicleListView::displayChoice(Vehicle veh)
 }
 
 
-void VehicleListView::handlesearchRequest()
+void VehicleListView::handleSearchRequest()
 {
     QDate filterDate = ui->dateDepIn->date();
 

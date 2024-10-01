@@ -43,7 +43,7 @@ signals:
 private slots:
     void handleVehicleChoice(qint32 row);
     void displayChoice(Vehicle veh);
-    void handlesearchRequest();
+    void handleSearchRequest();
 
 private:
     Ui::VehicleListView *ui;

@@ -19,17 +19,18 @@ public:
 
 private:
     void setConnectionToView();
+    void setNameFilterHandler();
 
 private slots:
     void deleteClient(Client client);
+    void handleFilterRequest(QString name);
 
 signals:
     void requestBookingFor(Client client);
 
 private:
     MainWindow *_win;
-
-    ClientList *_clientListView;
+    ClientList *_view;
 };
 
 #endif // CLIENTLISTCONTROLLER_HPP

@@ -9,7 +9,7 @@
 #include "src/views/MainWindow.hpp"
 #include "ClientListController/ClientListController.hpp"
 #include "BookingProcessController/BookingProcessController.hpp"
-#include "BookingListProcessController/BookingListProcessController.hpp"
+#include "BookingListController/BookingListController.hpp"
 #include "VehicleListController/VehicleListController.hpp"
 
 
@@ -46,7 +46,7 @@ private:
     MainWindow *_win;
 
     BookingProcessController *_BPController;
-    BookingListProcessController *_BLController;
+    BookingListController *_BLController;
     ClientListController *_clientListController;
     VehicleListController *_vehListController;
 };

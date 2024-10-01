@@ -19,7 +19,7 @@ public:
     void displayList();
 
 private:
-    void setDateFilterHandler();
+    void setFilterRequestHandler();
 
 private slots:
     void handleFilterRequest(QDate dateDep);
@@ -27,8 +27,6 @@ private slots:
 private:
     MainWindow *_win;
     VehicleListView *_view;
-
-    QMap<qint32, Vehicle> _vehList;
 };
 
 #endif // VEHICLELISTCONTROLLER_HPP

@@ -8,7 +8,7 @@ Client::Client()
 {
     _insertSttm = "INSERT INTO CLIENT VALUE (:num, :nom, :sexe, :adr, :tel)";
     _updateSttm = "UPDATE CLIENT SET NOM=:nom, SEXE=:sexe, ADRESSE=:adr, TEL=:tel "
-                  " WHERE NUMCLI=:num";
+                  "WHERE NUMCLI=:num";
     _deleteSttm = "DELETE FROM CLIENT WHERE NUMCLI=:num";
     _getNbResSttm = "SELECT COUNT(1) AS NBRES FROM RESERVATION WHERE NUMCLI=:num";
     _getLastNumSttm = "SELECT MAX(NUMCLI) AS LASTNUM FROM CLIENT";
@@ -32,7 +32,7 @@ qint32 Client::getLastNum()
 }
 
 
-void Client::syncNumIfNot()
+void Client::syncNum()
 {
     if (_num == 0) _num = getLastNum() + 1;
 }

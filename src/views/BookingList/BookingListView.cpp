@@ -9,6 +9,7 @@ BookingListView::BookingListView(QWidget *parent)
     setTableStyle();
     disableButton();
     setUserSelectionHandler();
+    setSearchRequestHandler();
 }
 
 BookingListView::~BookingListView()
@@ -29,15 +30,10 @@ void BookingListView::setBookingList(QMap<qint32, Booking> list)
 }
 
 
-void BookingListView::setVehicleList(QMap<qint32, Vehicle> list)
-{
-    _vehicleList = list;
-}
-
-
 void BookingListView::displayList()
 {
     ui->bookingTable->clearContents();
+    ui->bookingTable->setRowCount(0);
 
     int row, col;
     row = col = 0;
@@ -45,10 +41,10 @@ void BookingListView::displayList()
     for (Booking booking: _bookingList) {
         qint32 num = booking.getNum();
 
-        qint32 numCli = booking.getNumClient();
+        qint32 cliNum = booking.getcliNum();
         QString nomCli;
-        if (_clientList.contains(numCli))
-            nomCli = _clientList[numCli].getNom();
+        if (_clientList.contains(cliNum))
+            nomCli = _clientList[cliNum].getNom();
 
         qint32 numVeh = booking.getNumVeh();
         QDate dateDep = booking.getDateDep();
@@ -107,12 +103,19 @@ void BookingListView::setUserSelectionHandler()
 }
 
 
+void BookingListView::setSearchRequestHandler()
+{
+    connect(ui->searchBtn, &QPushButton::clicked,
+            this, &BookingListView::handleSearchRequest);
+}
+
+
 void BookingListView::handleBookingSelection(qint32 row)
 {
     qint32 num = getNumListAtRow(row);
     _booking = _bookingList.value(num, Booking());
-    qint32 numCli = _booking.getNumClient();
-    _client = _clientList.value(numCli, Client());
+    qint32 cliNum = _booking.getcliNum();
+    _client = _clientList.value(cliNum, Client());
     enableButton();
 }
 
@@ -126,4 +129,12 @@ void BookingListView::sendModifRequest()
 void BookingListView::sendDeleteRequest()
 {
     emit requestDeletionFor(_booking, _client);
+}
+
+
+void BookingListView::handleSearchRequest()
+{
+    QString cliName = ui->searchIn->text();
+
+    emit requestCliNameFilter(cliName);
 }

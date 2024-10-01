@@ -27,7 +27,7 @@ public:
     bool deleteDB();
 
     qint32 getLastNum();
-    void syncNumIfNot();
+    void syncNum();
     static QMap<qint32, Client> getList();
 
     bool isValid();

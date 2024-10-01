@@ -1,5 +1,5 @@
-#ifndef BOOKINGLISTPROCESSCONTROLLER_HPP
-#define BOOKINGLISTPROCESSCONTROLLER_HPP
+#ifndef BOOKINGLISTCONTROLLER_HPP
+#define BOOKINGLISTCONTROLLER_HPP
 
 #include <QObject>
 
@@ -12,31 +12,33 @@
 #include "src/views/BookingList/BookingListView.hpp"
 
 
-class BookingListProcessController : public QObject
+class BookingListController : public QObject
 {
     Q_OBJECT
 public:
-    explicit BookingListProcessController(QObject *parent = nullptr);
-    ~BookingListProcessController();
+    explicit BookingListController(QObject *parent = nullptr);
+    ~BookingListController();
 
     void initControlFor(MainWindow *win);
 
     void displayList();
 
 private:
-    void handleChangeRequest();
-    void handleDeleteRequest();
+    void setChangeRequestHandler();
+    void setDeleteRequestHandler();
+    void setFilterRequestHandler();
 
 signals:
-    void requestModificationFor(Booking booking, Client client);
+    void requestModifFor(Booking booking, Client client);
 
 private slots:
     void processDeletion(Booking booking, Client client);
+    void handleFilterRequest(QString name);
 
 private:
     MainWindow *_win;
-    BookingListView *_BLView;
+    BookingListView *_view;
 
 };
 
-#endif // BOOKINGLISTPROCESSCONTROLLER_HPP
+#endif // BOOKINGLISTCONTROLLER_HPP

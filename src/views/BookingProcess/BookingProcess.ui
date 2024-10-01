@@ -14,7 +14,7 @@
    <string>StackedWidget</string>
   </property>
   <property name="currentIndex">
-   <number>1</number>
+   <number>0</number>
   </property>
   <widget class="QWidget" name="bookingPage">
    <layout class="QGridLayout" name="gridLayout_3">
@@ -75,7 +75,7 @@
       <item>
        <widget class="QPushButton" name="resNextBtn">
         <property name="text">
-         <string>Next</string>
+         <string>Suivant</string>
         </property>
        </widget>
       </item>
@@ -181,7 +181,7 @@
       <item>
        <widget class="QPushButton" name="cliNextBtn">
         <property name="text">
-         <string>Next</string>
+         <string>Suivant</string>
         </property>
        </widget>
       </item>

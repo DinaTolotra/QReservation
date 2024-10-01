@@ -31,16 +31,19 @@ private:
     void disableBookingBtn();
     void disableDeleteBtn();
     void setUserSelectionHandler();
+    void setSearchRequestHandler();
     qint32 getNumListAtRow(qint32 row);
 
 signals:
     void requestBookingFor(Client client);
     void requestDeletionFor(Client client);
+    void requestNameFilter(QString name);
 
 private slots:
     void handleBookingSelection(qint32 row);
     void sendBookingRequest();
     void sendDeleteRequest();
+    void handleSearchRequest();
 
 private:
     Ui::ClientList *ui;

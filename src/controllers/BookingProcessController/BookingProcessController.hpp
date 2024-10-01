@@ -44,15 +44,21 @@ private:
 
     void displayVehicleList();
 
-    void createTicket();
+    bool isVehicleValidFor(
+        Vehicle veh,
+        QDate dateDep
+        );
 
 private slots:
-    void changePage(BookingProcess::Page from, BookingProcess::Page to);
+    void changePage(
+        BookingProcess::Page from,
+        BookingProcess::Page to
+        );
     void saveBooking();
 
 private:
     MainWindow *_win;
-    BookingProcess *_BPView;
+    BookingProcess *_view;
 
     State _currentState;
 

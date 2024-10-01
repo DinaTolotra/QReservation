@@ -13,7 +13,7 @@ INCLUDEPATH += \
     src/views/Client
 
 SOURCES += \
-    src/controllers/BookingListProcessController/BookingListProcessController.cpp \
+    src/controllers/BookingListController/BookingListController.cpp \
     src/controllers/ClientListController/ClientListController.cpp \
     src/controllers/VehicleListController/VehicleListController.cpp \
     src/controllers/subController.cpp \
@@ -34,7 +34,7 @@ SOURCES += \
     src/views/VehicleList/VehicleListView.cpp
 
 HEADERS += \
-    src/controllers/BookingListProcessController/BookingListProcessController.hpp \
+    src/controllers/BookingListController/BookingListController.hpp \
     src/controllers/ClientListController/ClientListController.hpp \
     src/controllers/MainController.hpp \
     src/controllers/VehicleListController/VehicleListController.hpp \

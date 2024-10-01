@@ -20,14 +20,14 @@ public:
     bool addDateDepToDB();
 
     qint32 getLastNum();
-    void syncNumIfNot();
+    void syncNum();
     static QMap<qint32, Booking> getList();
 
     bool isValid();
 
     // Getter
     qint32 getNum() const;
-    qint32 getNumClient() const;
+    qint32 getcliNum() const;
     qint32 getNumVeh() const;
     QDate getDateDep() const;
     QDate getDateRes() const;
@@ -38,7 +38,7 @@ public:
     // Setter
     void setNum(qint32 num);
     void setDateRes(const QDate &dateRes);
-    void setNumClient(qint32 numClient);
+    void setcliNum(qint32 cliNum);
     void setNumVeh(qint32 numVeh);
     void setDateDep(const QDate &dateDep);
     void setNumPlace(qint32 NumPlace);
@@ -52,7 +52,7 @@ private:
     QString _insertDateResSttm;
 
     qint32 _num;
-    qint32 _numClient;
+    qint32 _cliNum;
     qint32 _numVeh;
     QDate _dateDep;
     QDate _dateRes;
