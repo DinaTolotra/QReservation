@@ -7,7 +7,9 @@ VehicleListView::VehicleListView(QWidget *parent)
 {
     ui->setupUi(this);
     setTableStyle();
+    setCurrentDate();
     setUserChoiceHandler();
+    setSearchRequestHandler();
 }
 
 VehicleListView::~VehicleListView()
@@ -53,6 +55,13 @@ Vehicle VehicleListView::getVehicle()
 }
 
 
+void VehicleListView::disableSearch()
+{
+    ui->searchBtn->setEnabled(false);
+    ui->dateDepIn->setEnabled(false);
+}
+
+
 void VehicleListView::setTableStyle()
 {
     auto *headerView = ui->vehicleTable->horizontalHeader();
@@ -60,10 +69,23 @@ void VehicleListView::setTableStyle()
 }
 
 
+void VehicleListView::setCurrentDate()
+{
+    ui->dateDepIn->setDate(QDate::currentDate());
+}
+
+
 void VehicleListView::setUserChoiceHandler()
 {
     connect(ui->vehicleTable, &QTableWidget::cellDoubleClicked,
             this, &VehicleListView::handleVehicleChoice);
+}
+
+
+void VehicleListView::setSearchRequestHandler()
+{
+    connect(ui->searchBtn, &QPushButton::clicked,
+            this, &VehicleListView::handlesearchRequest);
 }
 
 
@@ -99,3 +121,12 @@ void VehicleListView::displayChoice(Vehicle veh)
     ui->placeDisp->display(nbPlace);
     ui->freePlaceDisp->display(nbPlaceDispo);
 }
+
+
+void VehicleListView::handlesearchRequest()
+{
+    QDate filterDate = ui->dateDepIn->date();
+
+    emit dateDepFilter(filterDate);
+}
+

@@ -5,6 +5,7 @@ MainController::MainController(QObject *parent)
     , _BPController(nullptr)
     , _BLController(nullptr)
     , _clientListController(nullptr)
+    , _vehListController(nullptr)
 {
     Database::setupDatabase();
     createWindow();
@@ -58,6 +59,9 @@ void MainController::changePage(MainWindow::Page from, MainWindow::Page to)
     case MainWindow::CLIENTLIST:
         stopClientList();
         break;
+    case MainWindow::VEHICLELIST:
+        stopVehicleList();
+        break;
     }
 
     switch (to) {
@@ -72,6 +76,9 @@ void MainController::changePage(MainWindow::Page from, MainWindow::Page to)
         break;
     case MainWindow::CLIENTLIST:
         initClientList();
+        break;
+    case MainWindow::VEHICLELIST:
+        initVehicleList();
         break;
     }
 }

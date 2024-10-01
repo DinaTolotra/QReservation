@@ -29,6 +29,7 @@ void BookingProcess::gotoPage(Page page)
         break;
     case VEHICLE:
         ui->vehicleForm->displayList();
+        ui->vehicleForm->disableSearch();
         break;
     }
 

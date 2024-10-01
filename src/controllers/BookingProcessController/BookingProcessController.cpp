@@ -189,6 +189,4 @@ void BookingProcessController::saveBooking()
     changePage(BookingProcess::BOOKING,
                BookingProcess::BOOKING
                );
-
-    createTicket();
 }

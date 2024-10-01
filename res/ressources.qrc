@@ -13,6 +13,7 @@
         <file>icons/lock.svg</file>
         <file>icons/user.svg</file>
         <file>icons/truck.svg</file>
+        <file>icons/search.svg</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/bus_1.png</file>

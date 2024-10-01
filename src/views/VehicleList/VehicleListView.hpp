@@ -27,17 +27,23 @@ public:
 
     Vehicle getVehicle();
 
+    void disableSearch();
+
 private:
     void setTableStyle();
+    void setCurrentDate();
     void setUserChoiceHandler();
+    void setSearchRequestHandler();
     qint32 getVehicleNumInRow(qint32 row);
 
 signals:
     void vehicleChoosed(Vehicle veh);
+    void dateDepFilter(QDate dateDep);
 
 private slots:
     void handleVehicleChoice(qint32 row);
     void displayChoice(Vehicle veh);
+    void handlesearchRequest();
 
 private:
     Ui::VehicleListView *ui;

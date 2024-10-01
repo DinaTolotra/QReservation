@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>350</height>
+    <height>400</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,13 @@
   <property name="minimumSize">
    <size>
     <width>400</width>
-    <height>350</height>
+    <height>400</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>400</width>
-    <height>350</height>
+    <height>400</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -35,6 +35,71 @@
    <string>Liste vehicule</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Date départ</string>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QDateEdit" name="dateDepIn">
+          <property name="displayFormat">
+           <string>dddd dd MMM</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="searchBtn">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../../../res/ressources.qrc">
+            <normaloff>:/icons/icons/search.svg</normaloff>:/icons/icons/search.svg</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
    <item>
     <widget class="QTableWidget" name="vehicleTable">
      <property name="horizontalScrollBarPolicy">
@@ -250,6 +315,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../res/ressources.qrc"/>
+ </resources>
  <connections/>
 </ui>

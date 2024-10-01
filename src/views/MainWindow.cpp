@@ -39,10 +39,17 @@ void MainWindow::setBookingListView(BookingListView *BLView)
 }
 
 
-void MainWindow::setClientListView(ClientList *clientList)
+void MainWindow::setClientListView(ClientList *clientListView)
 {
     auto cliListLyt = ui->clientListPage->layout();
-    cliListLyt->addWidget(clientList);
+    cliListLyt->addWidget(clientListView);
+}
+
+
+void MainWindow::setVehicleListView(VehicleListView *vehListView)
+{
+    auto vehListLyt = ui->vehListContainer->layout();
+    vehListLyt->addWidget(vehListView);
 }
 
 
@@ -83,5 +90,8 @@ void MainWindow::setPageChangeEventHandler()
     });
     connect(ui->cliListBtn, &QPushButton::clicked, [this]() -> void {
         emit this->requestPageChange(this->_currentPage, CLIENTLIST);
+    });
+    connect(ui->vehListBtn, &QPushButton::clicked, [this]() -> void {
+        emit this->requestPageChange(this->_currentPage, VEHICLELIST);
     });
 }

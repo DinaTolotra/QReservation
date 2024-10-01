@@ -10,6 +10,7 @@
 #include "ClientListController/ClientListController.hpp"
 #include "BookingProcessController/BookingProcessController.hpp"
 #include "BookingListProcessController/BookingListProcessController.hpp"
+#include "VehicleListController/VehicleListController.hpp"
 
 
 class MainController : public QObject
@@ -30,6 +31,8 @@ private:
     void stopBookingListProcess();
     void initClientList();
     void stopClientList();
+    void initVehicleList();
+    void stopVehicleList();
 
     void setBookingModifHandler();
     void setClientModifHandler();
@@ -45,7 +48,7 @@ private:
     BookingProcessController *_BPController;
     BookingListProcessController *_BLController;
     ClientListController *_clientListController;
-
+    VehicleListController *_vehListController;
 };
 
 #endif // MAINCONTROLLER_HPP

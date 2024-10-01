@@ -10,6 +10,7 @@
 #include "src/views/BookingProcess/BookingProcess.hpp"
 #include "src/views/BookingList/BookingListView.hpp"
 #include "src/views/ClientList/ClientList.hpp"
+#include "src/views/VehicleList/VehicleListView.hpp"
 
 
 QT_BEGIN_NAMESPACE
@@ -27,7 +28,8 @@ public:
         WELCOME = 0,
         BOOKING = 1,
         BOOKINGLIST = 2,
-        CLIENTLIST = 3
+        CLIENTLIST = 3,
+        VEHICLELIST = 4
     };
 
 public:
@@ -38,7 +40,8 @@ public:
 
     void setBookingProcessView(BookingProcess *BPView);
     void setBookingListView(BookingListView *BLView);
-    void setClientListView(ClientList *clientList);
+    void setClientListView(ClientList *clientListView);
+    void setVehicleListView(VehicleListView *vehListView);
 
     void warnUser(QString message);
     void informUser(QString message);

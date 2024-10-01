@@ -61,6 +61,26 @@ void MainController::stopClientList()
 }
 
 
+void MainController::initVehicleList()
+{
+    if (_win == nullptr) return;
+    if (_vehListController != nullptr) return;
+
+    _vehListController = new VehicleListController();
+    _vehListController->initControllerFor(_win);
+    _vehListController->displayList();
+}
+
+
+void MainController::stopVehicleList()
+{
+    if (_vehListController == nullptr) return;
+
+    delete _vehListController;
+    _vehListController = nullptr;
+}
+
+
 void MainController::setBookingModifHandler()
 {
     connect(
