@@ -23,7 +23,6 @@ SOURCES += \
     src/views/BookingProcess/BookingProcess.cpp \
     src/controllers/BookingProcessController/BookingProcessController.cpp \
     src/views/ClientList/ClientList.cpp \
-    src/views/Login/Login.cpp \
     src/views/MainWindow.cpp \
     src/models/Database.cpp \
     src/models/Entity.cpp \
@@ -43,7 +42,6 @@ HEADERS += \
     src/views/BookingProcess/BookingProcess.hpp \
     src/controllers/BookingProcessController/BookingProcessController.hpp \
     src/views/ClientList/ClientList.hpp \
-    src/views/Login/Login.hpp \
     src/views/MainWindow.hpp \
     src/models/Database.hpp \
     src/models/Entity.hpp \
@@ -61,7 +59,6 @@ FORMS += \
     src/views/BookingProcess/BookingProcess.ui \
     src/views/Client/ClientView.ui \
     src/views/ClientList/ClientList.ui \
-    src/views/Login/Login.ui \
     src/views/MainWindow.ui \
     src/views/VehicleList/VehicleListView.ui
 
