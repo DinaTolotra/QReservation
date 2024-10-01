@@ -135,7 +135,7 @@
          </property>
          <property name="icon">
           <iconset resource="../../../res/ressources.qrc">
-           <normaloff>:/icons/icons/man.svg</normaloff>:/icons/icons/man.svg</iconset>
+           <normaloff>:/icons/icons/male.png</normaloff>:/icons/icons/male.png</iconset>
          </property>
         </item>
         <item>
@@ -144,7 +144,7 @@
          </property>
          <property name="icon">
           <iconset resource="../../../res/ressources.qrc">
-           <normaloff>:/icons/icons/woman.svg</normaloff>:/icons/icons/woman.svg</iconset>
+           <normaloff>:/icons/icons/female.png</normaloff>:/icons/icons/female.png</iconset>
          </property>
         </item>
        </widget>

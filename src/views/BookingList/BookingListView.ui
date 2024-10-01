@@ -77,18 +77,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="delBtn">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
        <property name="text">
         <string>Supprimer</string>
        </property>
        <property name="icon">
         <iconset resource="../../../res/ressources.qrc">
-         <normaloff>:/icons/icons/trash-2.svg</normaloff>:/icons/icons/trash-2.svg</iconset>
+         <normaloff>:/icons/icons/delete.png</normaloff>:/icons/icons/delete.png</iconset>
        </property>
       </widget>
      </item>
@@ -110,18 +104,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="modifBtn">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
        <property name="text">
         <string>Modifier</string>
        </property>
        <property name="icon">
         <iconset resource="../../../res/ressources.qrc">
-         <normaloff>:/icons/icons/edit-3.svg</normaloff>:/icons/icons/edit-3.svg</iconset>
+         <normaloff>:/icons/icons/edit.png</normaloff>:/icons/icons/edit.png</iconset>
        </property>
       </widget>
      </item>

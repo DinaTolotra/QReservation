@@ -1,27 +1,25 @@
 <RCC>
     <qresource prefix="/icons">
-        <file>icons/man.svg</file>
-        <file>icons/woman.svg</file>
-        <file>icons/bookmark.svg</file>
-        <file>icons/home.svg</file>
-        <file>icons/save.svg</file>
-        <file>icons/chevron-right.svg</file>
-        <file>icons/chevrons-right.svg</file>
-        <file>icons/list.svg</file>
-        <file>icons/edit-3.svg</file>
-        <file>icons/trash-2.svg</file>
-        <file>icons/lock.svg</file>
-        <file>icons/user.svg</file>
-        <file>icons/truck.svg</file>
-        <file>icons/search.svg</file>
+        <file>icons/account_circle.png</file>
+        <file>icons/airport_shuttle.png</file>
+        <file>icons/bookmark_add.png</file>
+        <file>icons/bookmarks.png</file>
+        <file>icons/delete.png</file>
+        <file>icons/edit.png</file>
+        <file>icons/female.png</file>
+        <file>icons/home.png</file>
+        <file>icons/login.png</file>
+        <file>icons/male.png</file>
+        <file>icons/password.png</file>
+        <file>icons/patient_list.png</file>
+        <file>icons/search.png</file>
     </qresource>
     <qresource prefix="/images">
-        <file>images/bus_1.png</file>
-        <file>images/bus_1_64.png</file>
-        <file>images/bus_0.png</file>
-        <file>images/bus_0_64.png</file>
         <file>images/logo.png</file>
         <file>images/logo_128.png</file>
         <file>images/logo_256.png</file>
+        <file>images/bus_green.png</file>
+        <file>images/bus_red.png</file>
+        <file>images/bus_white.png</file>
     </qresource>
 </RCC>

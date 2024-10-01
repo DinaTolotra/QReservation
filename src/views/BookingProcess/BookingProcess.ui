@@ -14,7 +14,7 @@
    <string>StackedWidget</string>
   </property>
   <property name="currentIndex">
-   <number>2</number>
+   <number>1</number>
   </property>
   <widget class="QWidget" name="bookingPage">
    <layout class="QGridLayout" name="gridLayout_3">
@@ -76,10 +76,6 @@
        <widget class="QPushButton" name="resNextBtn">
         <property name="text">
          <string>Next</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../../../res/ressources.qrc">
-          <normaloff>:/icons/icons/chevron-right.svg</normaloff>:/icons/icons/chevron-right.svg</iconset>
         </property>
        </widget>
       </item>
@@ -187,10 +183,6 @@
         <property name="text">
          <string>Next</string>
         </property>
-        <property name="icon">
-         <iconset resource="../../../res/ressources.qrc">
-          <normaloff>:/icons/icons/chevrons-right.svg</normaloff>:/icons/icons/chevrons-right.svg</iconset>
-        </property>
        </widget>
       </item>
      </layout>
@@ -286,7 +278,7 @@
         </property>
         <property name="icon">
          <iconset resource="../../../res/ressources.qrc">
-          <normaloff>:/icons/icons/save.svg</normaloff>:/icons/icons/save.svg</iconset>
+          <normaloff>:/icons/icons/bookmark_add.png</normaloff>:/icons/icons/bookmark_add.png</iconset>
         </property>
        </widget>
       </item>

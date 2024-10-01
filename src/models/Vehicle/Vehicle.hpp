@@ -14,7 +14,6 @@ public:
     void syncNumIfNot();
 
     bool addToDB();
-    // bool updateDB();
     bool deleteDB();
     static QMap<qint32, Vehicle> getList();
 

@@ -109,14 +109,17 @@ void VehicleListView::handleVehicleChoice(qint32 row)
 
 void VehicleListView::displayChoice(Vehicle veh)
 {
+    QVector<QString> busImgPath = {
+        ":/images/images/bus_green.png",
+        ":/images/images/bus_white.png",
+        ":/images/images/bus_red.png"
+    };
+
     qint32 num = veh.getNum();
     qint32 nbPlace = veh.getNbPlace();
     qint32 nbPlaceDispo = veh.getNbPlaceDispo();
-    QString imgPath = ":/images/images/bus_?_64.png";
 
-    imgPath.replace("?", QString::number(num % 2));
-
-    ui->vehImg->setPixmap(QPixmap(imgPath));
+    ui->vehImg->setPixmap(QPixmap(busImgPath[num%3]));
     ui->vehNumDisp->display(num);
     ui->placeDisp->display(nbPlace);
     ui->freePlaceDisp->display(nbPlaceDispo);
