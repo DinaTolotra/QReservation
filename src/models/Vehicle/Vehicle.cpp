@@ -4,12 +4,18 @@ QString Vehicle::_getListSttm = "SELECT * FROM VEHICULE";
 
 Vehicle::Vehicle()
 {
-    _insertSttm = "INSERT INTO VEHICULE VALUE (:num, :nbPlace, :nbPDispo)";
+    _insertSttm = "INSERT INTO VEHICULE VALUE (:num, :nbPlace)";
     _selectSttm = "SELECT * FROM VEHICULE WHERE NUMVEH = :num";
-    _updateSttm = "UPDATE VEHICULE SET NBPLACE=:nbPlace, NBPLACEDISPO=:nbPDispo "
+    _updateSttm = "UPDATE VEHICULE SET NBPLACE=:nbPlace "
                   "WHERE NUMVEH = :num";
     _deleteSttm = "DELETE FROM VEHICULE WHERE NUMVEH=:num";
-    _getLastNumSttm = "SELECT MAX(NUMVEH) FROM VEHICULE";
+    _getFreePlaceSttm = "SELECT V.NBPLACE - COUNT(1) AS DISPO "
+                        "FROM VEHICULE V "
+                        "INNER JOIN RESERVATION R "
+                        "   ON R.NUMVEH = V.NUMVEH "
+                        "WHERE V.NUMVEH = :num "
+                        "GROUP BY V.NUMVEH";
+    _getLastNumSttm = "SELECT MAX(NUMVEH) AS LASTNUM FROM VEHICULE";
     _getDateDepSttm = "SELECT DATEDEPART FROM RESERVATION "
                       "WHERE NUMVEH = :num";
 }
@@ -24,7 +30,7 @@ qint32 Vehicle::getLastNum()
 
     bool ok;
 
-    QVariant v_num = query->value("MAX(NUMVEH)");
+    QVariant v_num = query->value("LASTNUM");
     qint32 num = v_num.toInt(&ok);
 
     if (ok) return num;
@@ -47,16 +53,14 @@ QMap<qint32, Vehicle> Vehicle::getList()
     query->exec(_getListSttm);
 
     while (query->next()) {
-        qint32 num, nbPlace, nbPlaceDispo;
+        qint32 num, nbPlace;
         Vehicle veh;
 
         num = query->value("NUMVEH").toInt();
         nbPlace = query->value("NBPLACE").toInt();
-        nbPlaceDispo = query->value("NBPLACEDISPO").toInt();
 
         veh.setNum(num);
         veh.setNbPlace(nbPlace);
-        veh.setNbPlaceDispo(nbPlaceDispo);
 
         vehList[num] = veh;
     }
@@ -67,7 +71,7 @@ QMap<qint32, Vehicle> Vehicle::getList()
 
 bool Vehicle::isValid()
 {
-    return _num > 0 && _nbPlaceDispo > 0;
+    return _num > 0 && getNbPlaceDispo() > 0;
 }
 
 
@@ -95,26 +99,12 @@ bool Vehicle::addToDB()
     query->prepare(_insertSttm);
     query->bindValue(":num", _num);
     query->bindValue(":nbPlace", _nbPlace);
-    query->bindValue(":nbPDispo", _nbPlaceDispo);
 
     bool ok = query->exec();
 
     if (!ok) qDebug() << query->lastError();
 
     return ok;
-}
-
-
-bool Vehicle::updateDB()
-{
-    Database db;
-    auto *query = db.getQuery();
-    query->prepare(_updateSttm);
-    query->bindValue(":num", _num);
-    query->bindValue(":nbPlace", _nbPlace);
-    query->bindValue(":nbPDispo", _nbPlaceDispo);
-
-    return query->exec();
 }
 
 
@@ -149,25 +139,24 @@ void Vehicle::setNbPlace(qint32 nbPlace)
     _nbPlace = nbPlace;
 }
 
-qint32 Vehicle::getNbPlaceDispo() const
+qint32 Vehicle::getNbPlaceDispo()
 {
-    return _nbPlaceDispo;
-}
+    Database db;
+    bool ok;
 
-void Vehicle::setNbPlaceDispo(qint32 nbPlaceDispo)
-{
-    _nbPlaceDispo = nbPlaceDispo;
-}
+    auto *query = db.getQuery();
+    query->prepare(_getFreePlaceSttm);
+    query->bindValue(":num", _num);
+    ok = query->exec();
 
-
-void Vehicle::incrementFreePlace()
-{
-    if (_nbPlaceDispo < _nbPlace)
-        _nbPlaceDispo++;
-}
+    ok = ok && query->next();
+    if (!ok)
+        qDebug() << query->lastError();
 
 
-void Vehicle::decrementFreePlace()
-{
-    if (_nbPlaceDispo > 0) _nbPlaceDispo--;
+    QVariant v_dispo = query->value("DISPO");
+    qint32 dispo = v_dispo.toInt(&ok);
+
+    if (ok) return dispo;
+    else return _nbPlace;
 }

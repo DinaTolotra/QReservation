@@ -53,6 +53,12 @@ void BookingProcessController::toUpdatingState()
 }
 
 
+void BookingProcessController::toAddingState()
+{
+    _currentState = State::ADDING;
+}
+
+
 void BookingProcessController::setConnectionToBP()
 {
     if (_BPView == nullptr) return;
@@ -99,6 +105,19 @@ bool BookingProcessController::getClientData()
 }
 
 
+bool BookingProcessController::getVehicleData()
+{
+    _veh = _BPView->getVehicle();
+
+    if (_veh.isValid()) {
+        return true;
+    } else {
+        _win->warnUser("Invalid vehicle data");
+        return false;
+    }
+}
+
+
 void BookingProcessController::displayVehicleList()
 {
     QMap<qint32, Vehicle> list = Vehicle::getList();
@@ -110,7 +129,6 @@ void BookingProcessController::displayVehicleList()
         QDate vehDateDep = veh.getDateDep();
         bool validDate = vehDateDep == dateDep;
         validDate = validDate || !vehDateDep.isValid();
-        validDate = validDate && veh.getNbPlaceDispo() > 0;
 
         if (validDate) filteredList[num] = veh;
     }
@@ -145,36 +163,32 @@ void BookingProcessController::changePage(
 
 void BookingProcessController::saveBooking()
 {
-    _veh = _BPView->getVehicle();
-    _veh.syncNumIfNot();
-
-    if (!_veh.isValid() )
-        return _win->warnUser("Invalid vehicle data");
-
-    if (_currentState == State::UPDATING) {
-        qint32 numVeh = _booking.getNumVeh();
-        auto list = Vehicle::getList();
-        list[numVeh].incrementFreePlace();
-        list[numVeh].updateDB();
-    }
+    if (!getVehicleData()) return;
 
     _booking.setNumVeh(_veh.getNum());
     _booking.setNumClient(_client.getNum());
-    _veh.decrementFreePlace();
 
     _booking.addDateDepToDB();
-    if (_currentState == State::CREATING) {
+
+    switch (_currentState) {
+    case State::CREATING:
         if (!_client.addToDB()) return;
         if (!_booking.addToDB()) return;
-        if (!_veh.updateDB()) return;
-    } else if (_currentState == State::UPDATING) {
+        break;
+    case State::UPDATING:
         if (!_client.updateDB()) return;
         if (!_booking.updateDB()) return;
-        if (!_veh.updateDB()) return;
+        break;
+    case State::ADDING:
+        if (!_client.updateDB()) return;
+        if (!_booking.addToDB()) return;
+        break;
     }
 
     _win->informUser("Reservation effectuée!");
-    changePage(BookingProcess::VEHICLE, BookingProcess::BOOKING);
+    changePage(BookingProcess::BOOKING,
+               BookingProcess::BOOKING
+               );
 
     createTicket();
 }

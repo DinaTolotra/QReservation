@@ -28,7 +28,7 @@ private:
     void handleDeleteRequest();
 
 signals:
-    void requestForModification(Booking booking, Client client);
+    void requestModificationFor(Booking booking, Client client);
 
 private slots:
     void processDeletion(Booking booking, Client client);

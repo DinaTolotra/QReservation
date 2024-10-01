@@ -9,6 +9,7 @@
 #include "src/views/Client/ClientView.hpp"
 #include "src/views/BookingProcess/BookingProcess.hpp"
 #include "src/views/BookingList/BookingListView.hpp"
+#include "src/views/ClientList/ClientList.hpp"
 
 
 QT_BEGIN_NAMESPACE
@@ -25,7 +26,8 @@ public:
     enum Page {
         WELCOME = 0,
         BOOKING = 1,
-        LIST = 2
+        BOOKINGLIST = 2,
+        CLIENTLIST = 3
     };
 
 public:
@@ -36,6 +38,7 @@ public:
 
     void setBookingProcessView(BookingProcess *BPView);
     void setBookingListView(BookingListView *BLView);
+    void setClientListView(ClientList *clientList);
 
     void warnUser(QString message);
     void informUser(QString message);

@@ -19,7 +19,8 @@ class BookingProcessController : public QObject
 public:
     enum State {
         CREATING,
-        UPDATING
+        UPDATING,
+        ADDING
     };
 
 public:
@@ -33,11 +34,13 @@ public:
 
     void toCreatingState();
     void toUpdatingState();
+    void toAddingState();
 
 private:
     void setConnectionToBP();
     bool getBookingData();
     bool getClientData();
+    bool getVehicleData();
 
     void displayVehicleList();
 

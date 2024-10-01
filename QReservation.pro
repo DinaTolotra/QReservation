@@ -15,6 +15,7 @@ INCLUDEPATH += \
 SOURCES += \
     src/controllers/BookingListProcessController/BookingListProcessController.cpp \
     src/controllers/BookingProcessController/ticket.cpp \
+    src/controllers/ClientListController/ClientListController.cpp \
     src/controllers/subController.cpp \
     src/main.cpp \
     src/controllers/MainController.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
 
 HEADERS += \
     src/controllers/BookingListProcessController/BookingListProcessController.hpp \
+    src/controllers/ClientListController/ClientListController.hpp \
     src/controllers/MainController.hpp \
     src/views/BookingList/BookingListView.hpp \
     src/views/BookingProcess/BookingProcess.hpp \

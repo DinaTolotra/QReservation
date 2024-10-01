@@ -39,6 +39,13 @@ void MainWindow::setBookingListView(BookingListView *BLView)
 }
 
 
+void MainWindow::setClientListView(ClientList *clientList)
+{
+    auto cliListLyt = ui->clientListPage->layout();
+    cliListLyt->addWidget(clientList);
+}
+
+
 void MainWindow::warnUser(QString message)
 {
     QMessageBox::warning(this, "Warning", message);
@@ -71,7 +78,10 @@ void MainWindow::setPageChangeEventHandler()
     connect(ui->bookingBtn, &QPushButton::clicked, [this]() -> void {
         emit this->requestPageChange(this->_currentPage, BOOKING);
     });
-    connect(ui->listBtn, &QPushButton::clicked, [this]() -> void {
-        emit this->requestPageChange(this->_currentPage, LIST);
+    connect(ui->resListBtn, &QPushButton::clicked, [this]() -> void {
+        emit this->requestPageChange(this->_currentPage, BOOKINGLIST);
+    });
+    connect(ui->cliListBtn, &QPushButton::clicked, [this]() -> void {
+        emit this->requestPageChange(this->_currentPage, CLIENTLIST);
     });
 }

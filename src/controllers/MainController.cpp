@@ -4,6 +4,7 @@ MainController::MainController(QObject *parent)
     : QObject{parent}
     , _BPController(nullptr)
     , _BLController(nullptr)
+    , _clientListController(nullptr)
 {
     Database::setupDatabase();
     createWindow();
@@ -42,21 +43,35 @@ void MainController::setupConnection()
 
 void MainController::changePage(MainWindow::Page from, MainWindow::Page to)
 {
-    if (to == from) return;
     _win->gotoPage(to);
+
+    switch (from) {
+    case MainWindow::WELCOME:
+        // nothing here
+        break;
+    case MainWindow::BOOKING:
+        stopBookingProcess();
+        break;
+    case MainWindow::BOOKINGLIST:
+        stopBookingListProcess();
+        break;
+    case MainWindow::CLIENTLIST:
+        stopClientList();
+        break;
+    }
 
     switch (to) {
     case MainWindow::WELCOME:
-        stopBookingProcess();
-        stopBookingListProcess();
+        // nothing here
         break;
     case MainWindow::BOOKING:
-        stopBookingListProcess();
         initBookingProcess();
         break;
-    case MainWindow::LIST:
-        stopBookingProcess();
+    case MainWindow::BOOKINGLIST:
         initBookingListProcess();
+        break;
+    case MainWindow::CLIENTLIST:
+        initClientList();
         break;
     }
 }
@@ -64,9 +79,16 @@ void MainController::changePage(MainWindow::Page from, MainWindow::Page to)
 
 void MainController::performModif(Booking booking, Client client)
 {
-    changePage(MainWindow::LIST, MainWindow::BOOKING);
+    changePage(MainWindow::BOOKINGLIST, MainWindow::BOOKING);
     _BPController->setBooking(booking);
     _BPController->setClient(client);
     _BPController->toUpdatingState();
 }
 
+
+void MainController::performBooking(Client client)
+{
+    changePage(MainWindow::CLIENTLIST, MainWindow::BOOKING);
+    _BPController->setClient(client);
+    _BPController->toAddingState();
+}

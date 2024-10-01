@@ -17,11 +17,11 @@ BookingListProcessController::~BookingListProcessController()
 
 void BookingListProcessController::initControlFor(MainWindow *win)
 {
-    if (_BLView == nullptr) {
-        _BLView = new BookingListView();
-    }
-
     _win = win;
+
+    if (_BLView == nullptr) {
+        _BLView = new BookingListView(_win);
+    }
 
     _win->setBookingListView(_BLView);
     handleChangeRequest();
@@ -43,14 +43,14 @@ void BookingListProcessController::displayList()
 
 void BookingListProcessController::handleChangeRequest()
 {
-    connect(_BLView, &BookingListView::requestForModification,
-            this, &BookingListProcessController::requestForModification);
+    connect(_BLView, &BookingListView::requestModificationFor,
+            this, &BookingListProcessController::requestModificationFor);
 }
 
 
 void BookingListProcessController::handleDeleteRequest()
 {
-    connect(_BLView, &BookingListView::requestForDeletion,
+    connect(_BLView, &BookingListView::requestDeletionFor,
             this, &BookingListProcessController::processDeletion);
 }
 
@@ -63,12 +63,7 @@ void BookingListProcessController::processDeletion(
     bool ok = _win->askUser("Etes-vous sure de supprimer cette réservation?");
     if (!ok) return;
 
-    auto vehList = Vehicle::getList();
-    qint32 numVeh = booking.getNumVeh();
-    Vehicle veh = vehList[numVeh];
     if (!booking.deleteDB()) return;
     if (!client.deleteDB()) return;
-    veh.incrementFreePlace();
-    veh.updateDB();
 }
 

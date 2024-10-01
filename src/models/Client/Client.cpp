@@ -10,7 +10,8 @@ Client::Client()
     _updateSttm = "UPDATE CLIENT SET NOM=:nom, SEXE=:sexe, ADRESSE=:adr, TEL=:tel "
                   " WHERE NUMCLI=:num";
     _deleteSttm = "DELETE FROM CLIENT WHERE NUMCLI=:num";
-    _getLastNumSttm = "SELECT MAX(NUMCLI) FROM CLIENT";
+    _getNbResSttm = "SELECT COUNT(1) AS NBRES FROM RESERVATION WHERE NUMCLI=:num";
+    _getLastNumSttm = "SELECT MAX(NUMCLI) AS LASTNUM FROM CLIENT";
 }
 
 
@@ -23,7 +24,7 @@ qint32 Client::getLastNum()
 
     bool ok;
 
-    QVariant v_num = query->value("MAX(NUMCLI)");
+    QVariant v_num = query->value("LASTNUM");
     qint32 num = v_num.toInt(&ok);
 
     if (ok) return num;
@@ -165,6 +166,28 @@ QString Client::getTelephone() const
 {
     return _telephone;
 }
+
+
+qint32 Client::getNbRes() const
+{
+    Database db;
+    bool ok;
+
+    auto *query = db.getQuery();
+    query->prepare(_getNbResSttm);
+    query->bindValue(":num", _num);
+    ok = query->exec();
+
+    if (ok) query->next();
+    else qDebug() << query->lastError();
+
+    QVariant v_nbRes = query->value("NBRES");
+    qint32 nbRes = v_nbRes.toInt(&ok);
+
+    if (ok) return nbRes;
+    else return 0;
+}
+
 
 void Client::setTelephone(const QString &telephone)
 {

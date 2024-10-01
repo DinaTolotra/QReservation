@@ -40,8 +40,40 @@ void MainController::stopBookingListProcess()
 }
 
 
+void MainController::initClientList()
+{
+    if (_win == nullptr) return;
+    if (_clientListController != nullptr) return;
+
+    _clientListController = new ClientListController();
+    _clientListController->initControllerFor(_win);
+    _clientListController->displayList();
+    setClientModifHandler();
+}
+
+
+void MainController::stopClientList()
+{
+    if (_clientListController == nullptr) return;
+
+    delete _clientListController;
+    _clientListController = nullptr;
+}
+
+
 void MainController::setBookingModifHandler()
 {
-    connect(_BLController, &BookingListProcessController::requestForModification,
-            this, &MainController::performModif);
+    connect(
+        _BLController, &BookingListProcessController::requestModificationFor,
+        this, &MainController::performModif
+        );
+}
+
+
+void MainController::setClientModifHandler()
+{
+    connect(
+        _clientListController, &ClientListController::requestBookingFor,
+        this, &MainController::performBooking
+        );
 }

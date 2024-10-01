@@ -39,6 +39,7 @@ public:
     QChar getCharSexe() const;
     QString getAdresse() const;
     QString getTelephone() const;
+    qint32 getNbRes() const;
 
     // Setter
     void setNum(qint32 num);
@@ -49,6 +50,7 @@ public:
 
 private:
     QString _getLastNumSttm;
+    QString _getNbResSttm;
     static QString _getListSttm;
 
     qint32 _num;

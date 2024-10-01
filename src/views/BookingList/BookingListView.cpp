@@ -7,7 +7,7 @@ BookingListView::BookingListView(QWidget *parent)
 {
     ui->setupUi(this);
     setTableStyle();
-    disableModifButton();
+    disableButton();
     setUserSelectionHandler();
 }
 
@@ -74,14 +74,14 @@ void BookingListView::setTableStyle()
 }
 
 
-void BookingListView::enableModifButton()
+void BookingListView::enableButton()
 {
     ui->modifBtn->setEnabled(true);
     ui->delBtn->setEnabled(true);
 }
 
 
-void BookingListView::disableModifButton()
+void BookingListView::disableButton()
 {
     ui->modifBtn->setEnabled(false);
     ui->delBtn->setEnabled(false);
@@ -113,17 +113,17 @@ void BookingListView::handleBookingSelection(qint32 row)
     _booking = _bookingList.value(num, Booking());
     qint32 numCli = _booking.getNumClient();
     _client = _clientList.value(numCli, Client());
-    enableModifButton();
+    enableButton();
 }
 
 
 void BookingListView::sendModifRequest()
 {
-    emit requestForModification(_booking, _client);
+    emit requestModificationFor(_booking, _client);
 }
 
 
 void BookingListView::sendDeleteRequest()
 {
-    emit requestForDeletion(_booking, _client);
+    emit requestDeletionFor(_booking, _client);
 }

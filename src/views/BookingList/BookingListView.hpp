@@ -28,14 +28,14 @@ public:
 
 private:
     void setTableStyle();
-    void enableModifButton();
-    void disableModifButton();
-    qint32 getNumListAtRow(qint32 row);
+    void enableButton();
+    void disableButton();
     void setUserSelectionHandler();
+    qint32 getNumListAtRow(qint32 row);
 
 signals:
-    void requestForModification(Booking booking, Client client);
-    void requestForDeletion(Booking booking, Client client);
+    void requestModificationFor(Booking booking, Client client);
+    void requestDeletionFor(Booking booking, Client client);
 
 private slots:
     void handleBookingSelection(qint32 row);

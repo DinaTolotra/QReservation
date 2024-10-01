@@ -7,6 +7,7 @@
 
 #include "src/models/Database.hpp"
 #include "src/views/MainWindow.hpp"
+#include "ClientListController/ClientListController.hpp"
 #include "BookingProcessController/BookingProcessController.hpp"
 #include "BookingListProcessController/BookingListProcessController.hpp"
 
@@ -27,18 +28,23 @@ private:
     void stopBookingProcess();
     void initBookingListProcess();
     void stopBookingListProcess();
+    void initClientList();
+    void stopClientList();
 
     void setBookingModifHandler();
+    void setClientModifHandler();
 
 private slots:
     void changePage(MainWindow::Page from, MainWindow::Page to);
     void performModif(Booking booking, Client client);
+    void performBooking(Client client);
 
 private:
     MainWindow *_win;
 
     BookingProcessController *_BPController;
     BookingListProcessController *_BLController;
+    ClientListController *_clientListController;
 
 };
 

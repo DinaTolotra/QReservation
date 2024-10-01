@@ -32,17 +32,17 @@ void VehicleListView::displayList()
     for (Vehicle veh: _vehList) {
         qint32 num = veh.getNum();
         qint32 nbPlace = veh.getNbPlace();
-        qint32 nbPlaceDispo = veh.getNbPlaceDispo();
+        qint32 placeDispo = veh.getNbPlaceDispo();
 
         ui->vehicleTable->setRowCount(row+1);
 
         QTableWidgetItem *numItem = new QTableWidgetItem(QString::number(num));
         QTableWidgetItem *nbPlaceItem = new QTableWidgetItem(QString::number(nbPlace));
-        QTableWidgetItem *nbPlaceDispoItem = new QTableWidgetItem(QString::number(nbPlaceDispo));
+        QTableWidgetItem *placeDispoItem = new QTableWidgetItem(QString::number(placeDispo));
 
         ui->vehicleTable->setItem(row, col=0, numItem);
         ui->vehicleTable->setItem(row, ++col, nbPlaceItem);
-        ui->vehicleTable->setItem(row++, ++col, nbPlaceDispoItem);
+        ui->vehicleTable->setItem(row++, ++col, placeDispoItem);
     }
 }
 
