@@ -21,5 +21,6 @@
         <file>images/bus_green.png</file>
         <file>images/bus_red.png</file>
         <file>images/bus_white.png</file>
+        <file>images/icon.png</file>
     </qresource>
 </RCC>
