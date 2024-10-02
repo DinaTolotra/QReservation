@@ -79,7 +79,7 @@ void ClientList::disableDeleteBtn()
 
 void ClientList::setUserSelectionHandler()
 {
-    connect(ui->clientTable, &QTableWidget::cellDoubleClicked,
+    connect(ui->clientTable, &QTableWidget::cellPressed,
             this, &ClientList::handleBookingSelection);
     connect(ui->resBtn, &QPushButton::clicked,
             this, &ClientList::sendBookingRequest);
@@ -108,9 +108,11 @@ void ClientList::handleBookingSelection(qint32 row)
     qint32 num = getNumListAtRow(row);
     _client = _cliList.value(num);
     qint32 nbRes = _client.getNbRes();
+
     enableBookingBtn();
     if (nbRes == 0)
         enableDeletBtn();
+    else disableDeleteBtn();
 }
 
 
@@ -128,6 +130,7 @@ void ClientList::sendDeleteRequest()
 
 void ClientList::handleSearchRequest()
 {
-    QString name = ui->searchIn->text();
-    emit requestNameFilter(name);
+    QString filter = ui->searchIn->text();
+
+    emit requestFilter(filter);
 }

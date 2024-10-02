@@ -94,7 +94,7 @@ qint32 BookingListView::getNumListAtRow(qint32 row)
 
 void BookingListView::setUserSelectionHandler()
 {
-    connect(ui->bookingTable, &QTableWidget::cellDoubleClicked,
+    connect(ui->bookingTable, &QTableWidget::cellPressed,
             this, &BookingListView::handleBookingSelection);
     connect(ui->modifBtn, &QPushButton::clicked,
             this, &BookingListView::sendModifRequest);
@@ -128,13 +128,14 @@ void BookingListView::sendModifRequest()
 
 void BookingListView::sendDeleteRequest()
 {
-    emit requestDeletionFor(_booking, _client);
+    emit requestDeletionFor(_booking);
 }
 
 
 void BookingListView::handleSearchRequest()
 {
-    QString cliName = ui->searchIn->text();
+    QString filter = ui->searchIn->text();
+    filter.replace("-", "/");
 
-    emit requestCliNameFilter(cliName);
+    emit requestFilter(filter);
 }

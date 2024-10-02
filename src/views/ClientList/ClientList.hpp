@@ -37,7 +37,7 @@ private:
 signals:
     void requestBookingFor(Client client);
     void requestDeletionFor(Client client);
-    void requestNameFilter(QString name);
+    void requestFilter(QString filter);
 
 private slots:
     void handleBookingSelection(qint32 row);

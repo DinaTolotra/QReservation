@@ -35,17 +35,19 @@ void VehicleListView::displayList()
     for (Vehicle veh: _vehList) {
         qint32 num = veh.getNum();
         qint32 nbPlace = veh.getNbPlace();
+        QDate dateDep = veh.getDateDep();
         qint32 placeDispo = veh.getNbPlaceDispo();
+        QString str_dateDep = dateDep.toString("ddd dd/MM");
+
+        if (!dateDep.isValid())
+            str_dateDep = "Non spécifier";
 
         ui->vehicleTable->setRowCount(row+1);
 
-        QTableWidgetItem *numItem = new QTableWidgetItem(QString::number(num));
-        QTableWidgetItem *nbPlaceItem = new QTableWidgetItem(QString::number(nbPlace));
-        QTableWidgetItem *placeDispoItem = new QTableWidgetItem(QString::number(placeDispo));
-
-        ui->vehicleTable->setItem(row, col=0, numItem);
-        ui->vehicleTable->setItem(row, ++col, nbPlaceItem);
-        ui->vehicleTable->setItem(row++, ++col, placeDispoItem);
+        ui->vehicleTable->setItem(row, col=0, new QTableWidgetItem(QString::number(num)));
+        ui->vehicleTable->setItem(row, ++col, new QTableWidgetItem(QString::number(nbPlace)));
+        ui->vehicleTable->setItem(row, ++col, new QTableWidgetItem(QString::number(placeDispo)));
+        ui->vehicleTable->setItem(row++, ++col, new QTableWidgetItem(str_dateDep));
     }
 }
 
@@ -78,7 +80,7 @@ void VehicleListView::setCurrentDate()
 
 void VehicleListView::setUserChoiceHandler()
 {
-    connect(ui->vehicleTable, &QTableWidget::cellDoubleClicked,
+    connect(ui->vehicleTable, &QTableWidget::cellPressed,
             this, &VehicleListView::handleVehicleChoice);
 }
 

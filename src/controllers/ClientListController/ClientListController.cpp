@@ -49,38 +49,48 @@ void ClientListController::setConnectionToView()
 
 void ClientListController::setNameFilterHandler()
 {
-    connect(_view, &ClientList::requestNameFilter,
+    connect(_view, &ClientList::requestFilter,
             this, &ClientListController::handleFilterRequest);
 }
 
 
 void ClientListController::deleteClient(Client client)
 {
-    bool ok = _win->askUser("Etes-vous sure de supprimer cette client?");
+    bool ok = _win->askUser("Supprimer cette client?");
 
     if (!ok) return;
     if (!client.deleteDB()) return;
+    displayList();
 }
 
 
-void ClientListController::handleFilterRequest(QString name)
+void ClientListController::handleFilterRequest(QString filter)
 {
-    if (name.isEmpty()) {
+    if (filter.isEmpty()) {
         displayList();
         return;
     }
 
     QMap<qint32, Client> clientList = Client::getList();
     QMap<qint32, Client> filteredData;
-    name = name.toLower();
+    filter = filter.toLower();
 
     for (Client cli: clientList) {
-        QString cliName = cli.getNom();
         qint32 cliNum = cli.getNum();
+        QString cliName = cli.getNom();
+        QString cliTel = cli.getTelephone();
+        QString str_num = QString::number(cliNum);
+
         cliName = cliName.toLower();
 
-        if (cliName.contains(name))
-            filteredData.insert(cliNum, cli);
+        bool ok = filter.contains("+261")
+                  && cliTel.contains(filter);
+        ok = ok || cliName.contains(filter);
+        ok = ok || str_num.contains(filter);
+
+        if (ok) filteredData.insert(
+                cliNum, cli
+                );
     }
 
     _view->setClientList(filteredData);

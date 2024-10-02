@@ -58,15 +58,12 @@ void BookingListController::setDeleteRequestHandler()
 
 void BookingListController::setFilterRequestHandler()
 {
-    connect(_view, &BookingListView::requestCliNameFilter,
+    connect(_view, &BookingListView::requestFilter,
             this, &BookingListController::handleFilterRequest);
 }
 
 
-void BookingListController::processDeletion(
-    Booking booking,
-    Client client
-    )
+void BookingListController::processDeletion(Booking booking)
 {
     bool ok = _win->askUser(
         "Supprimer cette réservation?"
@@ -75,13 +72,13 @@ void BookingListController::processDeletion(
     if (!ok) return;
 
     if (!booking.deleteDB()) return;
-    if (!client.deleteDB()) return;
+    displayList();
 }
 
 
-void BookingListController::handleFilterRequest(QString name)
+void BookingListController::handleFilterRequest(QString filter)
 {
-    if (name.isEmpty()) {
+    if (filter.isEmpty()) {
         displayList();
         return;
     }
@@ -89,19 +86,28 @@ void BookingListController::handleFilterRequest(QString name)
     QMap<qint32, Booking> bookingList = Booking::getList();
     QMap<qint32, Client> clientList = Client::getList();
     QMap<qint32, Booking> filteredData;
-    name = name.toLower();
+    filter = filter.toLower();
 
     for (Booking booking: bookingList) {
         qint32 bookingNum = booking.getNum();
+        QDate dateDep = booking.getDateDep();
         qint32 cliNum = booking.getcliNum();
         Client cli = clientList[cliNum];
         QString cliName = cli.getNom();
+
+        QString str_dateDep = dateDep.toString("dd/MM");
+        QString str_num = QString::number(bookingNum);
         cliName = cliName.toLower();
 
-        if (cliName.contains(name))
-            filteredData.insert(
-                bookingNum,
-                booking
+        QRegularExpression dateFormat("\\d\\d/\\d\\d");
+
+        bool ok = filter.contains(dateFormat)
+                  && str_dateDep.contains(filter);
+        ok = ok || cliName.contains(filter);
+        ok = ok || str_num.contains(filter);
+
+        if (ok) filteredData.insert(
+                bookingNum,booking
                 );
     }
 

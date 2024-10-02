@@ -23,7 +23,7 @@ private:
 
 private slots:
     void deleteClient(Client client);
-    void handleFilterRequest(QString name);
+    void handleFilterRequest(QString filter);
 
 signals:
     void requestBookingFor(Client client);

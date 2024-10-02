@@ -37,8 +37,14 @@
      </item>
      <item>
       <widget class="QLineEdit" name="searchIn">
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="placeholderText">
-        <string> nom client</string>
+        <string>num, nom client, date ...</string>
        </property>
       </widget>
      </item>

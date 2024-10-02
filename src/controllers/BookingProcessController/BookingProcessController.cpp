@@ -164,22 +164,20 @@ void BookingProcessController::changePage(
     BookingProcess::Page to
     )
 {
-    if (from == to) return;
-
-    switch (to) {
+    switch (from) {
     case BookingProcess::BOOKING :
-        _view->gotoPage(to);
-        // vide
+        if (!getBookingData())
+            return;
         break;
     case BookingProcess::CLIENT :
-        if (getBookingData())
-            _view->gotoPage(to);
+        if (!getClientData())
+            return;
         break;
     case BookingProcess::VEHICLE :
-        if (getClientData())
-            _view->gotoPage(to);
         break;
     }
+
+    _view->gotoPage(to);
 }
 
 
@@ -208,7 +206,7 @@ void BookingProcessController::saveBooking()
     }
 
     _win->informUser("Reservation effectuée!");
-    changePage(BookingProcess::BOOKING,
+    changePage(BookingProcess::VEHICLE,
                BookingProcess::BOOKING
                );
 }

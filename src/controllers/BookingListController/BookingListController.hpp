@@ -2,6 +2,7 @@
 #define BOOKINGLISTCONTROLLER_HPP
 
 #include <QObject>
+#include <QRegularExpression>
 
 #include "src/models/Database.hpp"
 #include "src/models/Client/Client.hpp"
@@ -32,8 +33,8 @@ signals:
     void requestModifFor(Booking booking, Client client);
 
 private slots:
-    void processDeletion(Booking booking, Client client);
-    void handleFilterRequest(QString name);
+    void processDeletion(Booking booking);
+    void handleFilterRequest(QString filter);
 
 private:
     MainWindow *_win;
